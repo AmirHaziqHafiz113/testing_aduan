@@ -1,0 +1,346 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* ----------------------------- */
+/* == HTML                */
+/* ----------------------------- */
+html {
+  font-size: 62.5%;
+  /* 14px = 10px  */
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* font-sizing for content */
+p,
+.p-like,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+td,
+th,
+label,
+textarea,
+caption,
+details,
+figure {
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* ----------------------------------- */
+/* == PROPRIETES NAVIGATEURS RESET     */
+/* ----------------------------------- */
+p:first-child
+,
+.p-like:first-child
+,
+ul:first-child
+,
+ol:first-child
+,
+dl:first-child
+,
+blockquote:first-child
+,
+pre:first-child
+,
+h1:first-child
+,
+h2:first-child
+,
+h3:first-child
+,
+h4:first-child
+,
+h5:first-child
+,
+h6:first-child {
+  margin-top: 0;
+}
+
+li p,
+li .p-like,
+li ul,
+li ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img,
+table,
+td,
+blockquote,
+code,
+pre,
+textarea,
+input,
+video {
+  max-width: 100%;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container:after,
+.container-fluid:after,
+.row:after {
+  clear: both;
+}
+
+/* ----------------------------------- */
+/* Home */
+/* ----------------------------------- */
+.pr-content-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #212121;
+}
+
+.pr-content {
+  position: relative;
+  height: 100%;
+  background: url("http://lorempicsum.com/nemo/1600/800/8") center center;
+  background-size: cover;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* .pr-content > * {
+  position: relative;
+  z-index: 10;
+}
+
+.pr-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background: linear-gradient(to bottom, rgba(33, 33, 33, 0.2) 0%, #212121 95%);
+} */
+
+/********************
+Navigation
+*********************/
+.pr-navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.pr-logo {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.pr-logo div {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #f44336;
+  background: #f44336;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-block;
+  opacity: 0.7;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);
+}
+
+.pr-menu ul li {
+  display: inline-block;
+  margin: 10px;
+}
+
+.pr-menu ul li a {
+  color: #fff;
+  font-size: 2rem;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.8);
+  font-weight:300;
+}
+
+/********************
+Content
+*********************/
+.pr-home-content {
+  color: #fff;
+  text-align: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 0;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: black;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+#form-aduan {
+  width: 100%;
+  height: 150px;
+}
+
+.pr-home-content h1 {
+  font-size: 6rem;
+  margin: 0;
+}
+
+.pr-home-content p {
+  margin: -10px 0 0 0;
+  font-size: 1.8rem;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.pr-fadein {
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0.0;
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/********************
+Footer
+*********************/
+.pr-arrow-wrapper {
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.pr-arrow,
+.pr-arrow:before {
+  position: absolute;
+  left: 51%;
+}
+
+.pr-arrow {
+  width: 30px;
+  height: 30px;
+  margin: -20px 0 0 -20px;
+  -webkit-transform: rotate(45deg);
+  border-left: none;
+  border-top: none;
+  border-right: 2px #f44336 solid;
+  border-bottom: 2px #f44336 solid;
+  border-radius: 20px;
+}
+
+.pr-arrow:before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  top: 52%;
+  margin: -10px 0 0 -10px;
+  border-left: none;
+  border-top: none;
+  border-right: 1px #f44336 solid;
+  border-bottom: 1px #f44336 solid;
+  border-radius: 20px;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: arrow;
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-10px, -10px);
+  }
+}
+
+#g-recaptcha-response {
+  display: block !important;
+  position: absolute;
+  margin: -78px 0 0 0 !important;
+  width: 302px !important;
+  height: 76px !important;
+  z-index: -999999;
+  opacity: 0;
+}
