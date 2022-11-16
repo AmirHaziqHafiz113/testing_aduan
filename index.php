@@ -1,3 +1,10 @@
+<?php
+session_start();
+$connect = mysqli_connect("localhost", "root", "", "aduan");
+$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
+$result = mysqli_query($connect, $query);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +14,7 @@
     <title>Aduan Bernama</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="css/app.css'" rel='stylesheet'>
+    <link href="css/app.css" rel="stylesheet">
     <script type="text/javascript">
         var onloadCallback = function() {
         };
@@ -55,8 +62,7 @@
                                             </button>
                                             </div>
                                             <div class="modal-body"><grammarly-extension style="position: absolute; top: 0px; left: 0px; pointer-events: none;"><div data-grammarly-part="highlights" style="position: absolute; top: 0px; left: 0px;"><div style="box-sizing: content-box; top: 1px; left: 1px; width: 0px; height: 0px; position: relative; pointer-events: none; overflow: hidden; border: 0px; border-radius: 0px; padding: 0px; margin: 0px;"><div style="position: absolute; top: 0px; left: 0px;"><div style="height: 815px; width: 1440px;"></div><div style="position: absolute; top: 0px; left: 0px; height: 815px; width: 1440px;"></div></div></div></div><div data-grammarly-part="button" style="position: absolute; top: 0px; left: 0px;"><div style="box-sizing: content-box; top: 1px; left: 1px; width: 0px; height: 0px; position: relative; pointer-events: none; overflow: hidden; border: 0px; border-radius: 0px; padding: 0px; margin: 0px;"><div style="position: absolute; transform: translate(-100%, -100%); top: -14px; left: -22px; pointer-events: all;"><div style="display: flex; flex-direction: row;"><div class="_3-ITD"><div class="_5WizN aN9_b _1QzSN"><div class="_3YmQx"><div title="Protected by Grammarly" class="_3QdKe">&nbsp;</div></div></div></div></div></div></div></div></grammarly-extension>
-                                            <form action='DataInsert' method='post' enctype='multipart/form-data'>
-                                                @csrf
+                                            <form action='' method='post' enctype='multipart/form-data'>
                                                 <div class="form-group">
                                                 <label for="Nama_Pengadu" class="col-form-label">Nama Pengadu:</label>
                                                     <input type="text" class="form-control" name="Nama_Pengadu" placeholder='Isi nama anda' required>
@@ -76,7 +82,7 @@
                                                 <div class="g-recaptcha" id="my_captcha_form" data-sitekey="6LcAw7wiAAAAABwHXS4weO5EuyQEl5kjuC5tFDVr" required></div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-success">Send message</button>
+                                                    <button type="submit" value='submit' class="btn btn-success" name="submit-btn">Send message</button>
                                                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                                                 </div>
                                             </form>
@@ -93,6 +99,7 @@
             </div>
         </div>
     </div>
+
     <script src="js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
