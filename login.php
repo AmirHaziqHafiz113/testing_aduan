@@ -37,10 +37,10 @@
 	<div class="card card-authentication1 mx-auto my-5">
 		<div class="card-body">
 		 <div class="card-content p-2">
-		  <div class="card-title text-uppercase text-center py-3">Sign In</div>
-		    <form>
+		  <div class="card-title text-uppercase text-center py-3">Log In</div>
+		    <form action='POST'>
 			  <div class="form-group">
-			  <label for="exampleInputUsername" class="sr-only" name="username">Username</label>
+			  <label for="exampleInputUsername" class="sr-only" name="U_Name">Username</label>
 			   <div class="position-relative has-icon-right">
 				  <input type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Enter Username">
 				  <div class="form-control-position">
@@ -58,7 +58,7 @@
 			   </div>
 			  </div>
 			</div>
-			 <button type="button" class="btn btn-light btn-block" name="login-btn">Sign In</button>
+			 <button type="button" type='submit' class="btn btn-light btn-block" name="login-btn">Sign In</button>
 			</div>
 			 </form>
 		   </div>
@@ -114,18 +114,18 @@
     $conn = mysqli_connect('localhost', 'root', '', 'aduan');
   
     if (isset($_POST['login-btn'])) {
-        $username = $_POST['username'];
+        $username = $_POST['U_Name'];
         $password = $_POST['password'];
   
-        $select = "SELECT * FROM user WHERE username='$U_Name' AND password='$U_Password'";
+        $select = "SELECT * FROM user WHERE U_Name='$U_Name' AND password='$U_Password'";
         $run = mysqli_query($conn, $select);
         $row_user = mysqli_fetch_array($run);
   
         $db_username = $row_user['U_Name'];
-        $db_password = $row_user['U_password'];
+        $db_password = $row_user['password'];
         if ($username == $db_email && $password == $db_password) {
             echo "<script>window.open('display_data.php','_self');</script>";
-            $_SESSION['username'] = $db_username;
+            $_SESSION['U_Name'] = $db_username;
         } else {
             echo "Email or Password is Wrong!";
         }
