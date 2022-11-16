@@ -38,11 +38,11 @@
 		<div class="card-body">
 		 <div class="card-content p-2">
 		  <div class="card-title text-uppercase text-center py-3">Log In</div>
-		    <form action='POST'>
+		    <form action=''  method='post'>
 			  <div class="form-group">
-			  <label for="exampleInputUsername" class="sr-only" name="U_Name">Username</label>
+			  <label for="exampleInputU_Name" class="sr-only" name="U_Name">U_Name</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Enter Username">
+				  <input type="text" id="exampleInputU_Name" class="form-control input-shadow" placeholder="Enter U_Name">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
@@ -58,7 +58,7 @@
 			   </div>
 			  </div>
 			</div>
-			 <button type="button" type='submit' class="btn btn-light btn-block" name="login-btn">Sign In</button>
+			 <button type='submit' class="btn btn-light btn-block" name="login-btn" value='login'>Sign In</button>
 			</div>
 			 </form>
 		   </div>
@@ -108,31 +108,7 @@
   <!--end color switcher-->
 	
 	</div><!--wrapper-->
-	<!--php script-->
-
-    <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'aduan');
   
-    if (isset($_POST['login-btn'])) {
-        $username = $_POST['U_Name'];
-        $password = $_POST['password'];
-  
-        $select = "SELECT * FROM user WHERE U_Name='$U_Name' AND password='$U_Password'";
-        $run = mysqli_query($conn, $select);
-        $row_user = mysqli_fetch_array($run);
-  
-        $db_username = $row_user['U_Name'];
-        $db_password = $row_user['password'];
-        if ($username == $db_email && $password == $db_password) {
-            echo "<script>window.open('display_data.php','_self');</script>";
-            $_SESSION['U_Name'] = $db_username;
-        } else {
-            echo "Email or Password is Wrong!";
-        }
-    }
-    ?>
-  
-    <!--end php script-->
   <!-- Bootstrap core JavaScript-->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/popper.min.js"></script>
