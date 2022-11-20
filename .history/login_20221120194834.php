@@ -29,20 +29,20 @@
         $user_name = $_POST['user_name'];
         $password = $_POST['password'];
 
-        $select = "SELECT * FROM users WHERE U_Name='$user_name'";
+        $select = "SELECT * FROM user WHERE U_Name='$user_name'";
         $run = mysqli_query($conn, $select);
         $row_user = mysqli_fetch_array($run);
 
-        $db_user_name = $row_user['U_name'];
+        $db_email = $row_user['U_name'];
         $db_password = $row_user['password'];
-        if ($user_name == $db_user_name && $password == $db_password) {
+        if ($email == $db_email && $password == $db_password) {
             echo "<script>window.open('display_data.php','_self');</script>";
-            $_SESSION['user_name'] = $db_user_name;
+            $_SESSION['email'] = $db_email;
         } else {
             echo "Email or Password is Wrong!";
         }
     }
-?>
+    ?>
 
 <body class="bg-theme bg-theme1">
 

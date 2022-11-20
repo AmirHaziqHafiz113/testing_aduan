@@ -23,25 +23,19 @@
   
 </head>
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'aduan');
+session_start();
+$connection= new mysqli("localhost","root","","aduan");
+ 
+    if ($connection->connect_error){
+    die("Connection failed".$connection->connect_error);
+     }
+    else 
 
-    if (isset($_POST['login-btn'])) {
-        $user_name = $_POST['user_name'];
-        $password = $_POST['password'];
-
-        $select = "SELECT * FROM users WHERE U_Name='$user_name'";
-        $run = mysqli_query($conn, $select);
-        $row_user = mysqli_fetch_array($run);
-
-        $db_user_name = $row_user['U_name'];
-        $db_password = $row_user['password'];
-        if ($user_name == $db_user_name && $password == $db_password) {
-            echo "<script>window.open('display_data.php','_self');</script>";
-            $_SESSION['user_name'] = $db_user_name;
-        } else {
-            echo "Email or Password is Wrong!";
-        }
-    }
+    $username= $_REQUEST['U_Name']; 
+    $password=$_REQUEST['password'];
+  $query="SELECT * from users WHERE U_Name='$username' AND password='$password'";
+  $result= mysqli_query($connection,$query);
+  $empty= mysqli_num_rows($result);
 ?>
 
 <body class="bg-theme bg-theme1">

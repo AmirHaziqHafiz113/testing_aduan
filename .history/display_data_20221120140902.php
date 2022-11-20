@@ -3,12 +3,8 @@
 <?php
 session_start();
 $connect = mysqli_connect("localhost", "root", "", "aduan");
-$query = "SELECT * FROM content ORDER BY ID DESC";
+$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
 $result = mysqli_query($connect, $query);
-
-if (!isset($_SESSION['user_name'])) {
-    echo "<script>window.open('login.php','_self')</script>";
-}
 ?>
 
 <head>

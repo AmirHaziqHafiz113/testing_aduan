@@ -42,7 +42,7 @@
             echo "Email or Password is Wrong!";
         }
     }
-?>
+    ?>
 
 <body class="bg-theme bg-theme1">
 
