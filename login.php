@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +22,21 @@
   <link href="assets/css/app-style.css" rel="stylesheet"/>
   
 </head>
+<?php
+session_start();
+$connection= new mysqli("localhost","root","","aduan");
+ 
+    if ($connection->connect_error){
+    die("Connection failed".$connection->connect_error);
+     }
+    else 
+
+    $username= $_REQUEST['U_Name']; 
+    $password=$_REQUEST['password'];
+  $query="SELECT * from users WHERE U_Name='$username' AND password='$password'";
+  $result= mysqli_query($connection,$query);
+  $empty= mysqli_num_rows($result);
+?>
 
 <body class="bg-theme bg-theme1">
 
@@ -38,18 +52,18 @@
 		<div class="card-body">
 		 <div class="card-content p-2">
 		  <div class="card-title text-uppercase text-center py-3">Log In</div>
-		    <form action=''  method='post'>
+		    <form action=''  method='post' autocomplete='off'>
 			  <div class="form-group">
-			  <label for="exampleInputU_Name" class="sr-only" name="U_Name">U_Name</label>
+			  <label for="exampleInputU_Name" class="sr-only" name="user_name">UserName</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="text" id="exampleInputU_Name" class="form-control input-shadow" placeholder="Enter U_Name">
+				  <input type="text" id="exampleInputU_Name" class="form-control input-shadow" placeholder="Enter UserName">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
 			   </div>
 			  </div>
 			  <div class="form-group">
-			  <label for="exampleInputPassword" class="sr-only" name="password">Password</label>
+			  <label for="exampleInputPassword" class="sr-only" name="user_password">Password</label>
 			   <div class="position-relative has-icon-right">
 				  <input type="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
 				  <div class="form-control-position">
@@ -58,7 +72,7 @@
 			   </div>
 			  </div>
 			</div>
-			 <button type='submit' class="btn btn-light btn-block" name="login-btn" value='login'>Sign In</button>
+			 <button type='submit' class="btn btn-light btn-block" name="login-btn">Sign In</button>
 			</div>
 			 </form>
 		   </div>

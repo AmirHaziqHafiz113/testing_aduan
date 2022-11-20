@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+<?php
+session_start();
+$connect = mysqli_connect("localhost", "root", "", "aduan");
+$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
+$result = mysqli_query($connect, $query);
+?>
 
 <head>
     <meta charset="utf-8">

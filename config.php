@@ -1,7 +1,14 @@
-<?php
-   define('DB_SERVER', 'localhost');
-   define('DB_USERNAME', 'root');
-   define('DB_PASSWORD', '');
-   define('DB_DATABASE', 'aduan');
-   $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
+<?php 
+    // Enable us to use Headers
+    ob_start();
+    // Set sessions
+    if(!isset($_SESSION)) {
+        session_start();
+    }
+    $hostname = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "aduan";
+    
+    $connection = mysqli_connect($hostname, $username, $password, $dbname) or die("Database connection not established.")
 ?>
