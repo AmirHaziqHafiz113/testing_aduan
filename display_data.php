@@ -3,10 +3,10 @@
 <?php
 session_start();
 $connect = mysqli_connect("localhost", "root", "", "aduan");
-$query = "SELECT * FROM content ORDER BY ID DESC";
+$query = "SELECT * FROM content ORDER BY id DESC";
 $result = mysqli_query($connect, $query);
 
-if (!isset($_SESSION['user_name'])) {
+if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
 ?>

@@ -22,28 +22,6 @@
   <link href="assets/css/app-style.css" rel="stylesheet"/>
   
 </head>
-<?php
-    $conn = mysqli_connect('localhost', 'root', '', 'aduan');
-
-    if (isset($_POST['login-btn'])) {
-        $user_name = $_POST['user_name'];
-        $password = $_POST['password'];
-
-        $select = "SELECT * FROM users WHERE U_Name='$user_name'";
-        $run = mysqli_query($conn, $select);
-        $row_user = mysqli_fetch_array($run);
-
-        $db_user_name = $row_user['U_name'];
-        $db_password = $row_user['password'];
-        if ($user_name == $db_user_name && $password == $db_password) {
-            echo "<script>window.open('display_data.php','_self');</script>";
-            $_SESSION['user_name'] = $db_user_name;
-        } else {
-            echo "Email or Password is Wrong!";
-        }
-    }
-?>
-
 <body class="bg-theme bg-theme1">
 
 <!-- start loader -->
@@ -58,20 +36,20 @@
 		<div class="card-body">
 		 <div class="card-content p-2">
 		  <div class="card-title text-uppercase text-center py-3">Log In</div>
-		    <form action=''  method='post' autocomplete='off'>
+		    <form action='config.php'  method='post' autocomplete='off'>
 			  <div class="form-group">
-			  <label for="exampleInputU_Name" class="sr-only" name="user_name">UserName</label>
+			  <label for="exampleInputU_Name" class="sr-only" >UserName</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="text" id="exampleInputU_Name" class="form-control input-shadow" placeholder="Enter UserName">
+				  <input type="text" id="exampleInputU_Name" name="user" class="form-control input-shadow" placeholder="Enter UserName">
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
 			   </div>
 			  </div>
 			  <div class="form-group">
-			  <label for="exampleInputPassword" class="sr-only" name="user_password">Password</label>
+			  <label for="exampleInputPassword" class="sr-only" >Password</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
+				  <input type="password" name="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
 				  <div class="form-control-position">
 					  <i class="icon-lock"></i>
 				  </div>

@@ -1,14 +1,37 @@
-<?php 
-    // Enable us to use Headers
-    ob_start();
-    // Set sessions
-    if(!isset($_SESSION)) {
-        session_start();
-    }
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "aduan";
-    
-    $connection = mysqli_connect($hostname, $username, $password, $dbname) or die("Database connection not established.")
+<?php
+session_start();
+$connection= new mysqli("localhost","root","","aduan");
+
+    if ($connection->connect_error){
+    die("Connection failed".$connection->connect_error);
+     }
+    else 
+
+    $username= $_REQUEST['user']; 
+    $password=$_REQUEST['password'];
+    $query="SELECT * from users WHERE U_Name='$username' AND U_Password='$password'";
+	$result= mysqli_query($connection,$query);
+	$empty= mysqli_num_rows($result);
+
+
+if($empty==0){ 
+
+	?>
+<script>
+
+  alert("password salah");
+window.location='login.php'
+
+</script>
+<?php
+}
+
+
+else {
+  
+  $_SESSION['sessionname']=$username;
+
+echo "<script>alert('WELCOME .$username. to SSF CLOTHING'); window.location.href='display_data.php'; </script>";
+
+}
 ?>
