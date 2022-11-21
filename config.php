@@ -15,23 +15,15 @@ $connection= new mysqli("localhost","root","","aduan");
 
 
 if($empty==0){ 
-
-	?>
-<script>
-
-  alert("password salah");
-window.location='login.php'
-
-</script>
-<?php
+    echo '<script>
+        alert("password salah");
+        window.location="login.php";
+    </script>';
 }
 
-
-else {
-  
-  $_SESSION['sessionname']=$username;
-
-echo "<script>alert('WELCOME .$username. to SSF CLOTHING'); window.location.href='display_data.php'; </script>";
+else {  
+    $_SESSION['sessionname']=$username;
+    echo "<script>alert('WELCOME .$username. to aduan'); window.location.href='display_data.php'; </script>";
 
 }
 ?>
