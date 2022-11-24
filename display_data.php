@@ -2,8 +2,8 @@
 <html dir="ltr" lang="en">
 <?php
 $connection= new mysqli("localhost","root","","aduan");
-$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
-$result = mysqli_query($connect, $query);
+$query = "SELECT * FROM aduan_tb ORDER BY id DESC";
+$result = mysqli_query($connection, $query);
 session_start();
 
 
