@@ -2,6 +2,8 @@
 <html dir="ltr" lang="en">
 <?php
 $connection= new mysqli("localhost","root","","aduan");
+$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
+$result = mysqli_query($connect, $query);
 session_start();
 
 
@@ -173,7 +175,7 @@ session_start();
                                 </li>
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="authentication-login1.html"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="logout.php"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span
                                     class="hide-menu">Logout</span></a></li>
                     </ul>
@@ -244,8 +246,8 @@ session_start();
                                                                 <td>' . $row["Email"] . '</td>  
                                                                 <td>' . $row["Aduan_Info"] . '</td> 
                                                                 <td><a class="btn btn-default" href="' . $view . '" target="_blank">View</a></td>
-                                                                <td><a class="btn btn-primary" href="edit_content.php?edit=' . $row["id"] . '">Update</a></td>
-                                                                <td><a class="btn btn-danger" href="display_data.php?del=' . $row["id"] . '">Delete</a></td>
+                                                                <td><a class="btn btn-primary" href="edit_content.php?edit=' . $row["Aduan_ID"] . '">Update</a></td>
+                                                                <td><a class="btn btn-danger" href="display_data.php?del=' . $row["Aduan_ID"] . '">Delete</a></td>
                                                         </tr>  
                                                         ';
                                             }
