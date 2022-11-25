@@ -228,11 +228,12 @@ session_start();
                                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Header 1</th>
-                                            <th>Header 2</th>
-                                            <th>Header 3</th>
-                                            <th>Header 4</th>
-                                            <th>Header 5</th>
+                                            <th>Nama Pengadu</th>
+                                            <th>Email</th>
+                                            <th>No. Telefon Pengadu</th>
+                                            <th>Info aduan</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -249,6 +250,7 @@ session_start();
                                                 echo "<td>"  . $row['No_Tel'] . "</td>";
                                                 echo "<td>"  . $row['Aduan_Info'] . "</td>";
                                                 echo "<td>"  . $row1['Description'] . "</td>";
+                                                echo "<td><a class='btn btn-secondary' href=''>View</a>&nbsp;&nbsp;<a class='btn btn-danger' href=''>Delete</a>&nbsp;&nbsp;<a class='btn btn-primary' href=''>Update</a></td>"; 
                                         echo"</tr>";
                                         }
                                         ?>
