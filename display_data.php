@@ -2,11 +2,11 @@
 <html dir="ltr" lang="en">
 <?php
 $connection= new mysqli("localhost","root","","aduan");
-$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
+$query = "SELECT * 
+FROM aduan_tb 
+ORDER BY Aduan_ID DESC";
 $result = mysqli_query($connection, $query);
 session_start();
-
-
 ?>
 
 <head>
@@ -237,13 +237,18 @@ session_start();
                                     </thead>
                                     <tbody>
                                     <?php
-                                        while ($row = mysqli_fetch_assoc($result)) {                                                                
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                        $query1 = "SELECT Description 
+                                        FROM status
+                                        WHERE Status_ID = ".$row['Status_ID'].";";
+                                        $result1 = mysqli_query($connection, $query1);
+                                        $row1 = mysqli_fetch_assoc($result1);                                                  
                                         echo"<tr>";                    
                                                 echo "<td>"  . $row['Nama_Pengadu'] . "</td>";
                                                 echo "<td>"  . $row['Email'] . "</td>";
                                                 echo "<td>"  . $row['No_Tel'] . "</td>";
                                                 echo "<td>"  . $row['Aduan_Info'] . "</td>";
-                                                echo "<td>"  . $row['Status_ID'] . "</td>";
+                                                echo "<td>"  . $row1['Description'] . "</td>";
                                         echo"</tr>";
                                         }
                                         ?>

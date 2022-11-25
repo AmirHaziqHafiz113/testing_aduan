@@ -7,8 +7,8 @@
     $Aduan_Info = $_POST['Aduan_Info'];
     $No_Tel = $_POST['No_Tel'];
     $Email = $_POST['Email'];
-    $insert = "INSERT INTO aduan_tb (Nama_Pengadu,Aduan_Info,No_Tel,Email)
-    VALUES('$Nama_Pengadu','$Aduan_Info','$No_Tel','$Email')";
+    $insert = "INSERT INTO aduan_tb (Nama_Pengadu,Aduan_Info,No_Tel,Email,Status_ID)
+    VALUES('$Nama_Pengadu','$Aduan_Info','$No_Tel','$Email', '40002')";
     $run_insert = mysqli_query($conn, $insert);
     if ($run_insert === true) {
       $_SESSION['status'] = "Sign Up Completed";
