@@ -23,6 +23,7 @@ session_start();
     <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -103,7 +104,7 @@ include_once('header.php');
                                                 echo "<td>"  . $row['Aduan_Info'] . "</td>";
                                                 echo "<td>"  . $row1['Description'] . "</td>";
                                                 echo "<td><center>
-                                                <a class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'  >View</a>&nbsp;&nbsp;
+                                                <a class='btn btn-info' data-toggle='modal' data-target='#exampleModal' style='color:white'>View</a>&nbsp;&nbsp;
                                                 <a class='btn btn-danger' href=''>Delete</a>&nbsp;&nbsp;
                                                 <a class='btn btn-primary' href=''>Insert</a></center></td>"; 
                                         echo"</tr>";
@@ -121,9 +122,8 @@ include_once('header.php');
                 <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- Modal  -->
+            <!-- End Container fluid  -->
             <!-- ============================================================== -->
-
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -136,7 +136,7 @@ include_once('header.php');
                     <div class="modal-body">
                         <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
+                            <label for="recipient-name" class="col-form-label" >Recipient:</label>
                             <input type="text" class="form-control" id="recipient-name">
                         </div>
                         <div class="form-group">
@@ -147,7 +147,6 @@ include_once('header.php');
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Send message</button>
                     </div>
                     </div>
                 </div>
@@ -209,8 +208,9 @@ $(document).ready(function () {
 		],
 		initComplete: function (settings, json) {
 			$(".dt-buttons .btn-group").append(
-				'<a id="cv" class="btn btn-primary" href="#">CARD VIEW</a>'
+				'<a id="cv" href="#">CARD VIEW</a>'
 			);
+
 			$("#cv").on("click", function () {
 				if ($("#example").hasClass("card")) {
 					$(".colHeader").remove();
@@ -230,16 +230,9 @@ $(document).ready(function () {
 					});
 				}
 				$("#example").toggleClass("card");
+                
 			});
-		}$('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipient = button.data('whatever') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var modal = $(this)
-  modal.find('.modal-title').text('New message to ' + recipient)
-  modal.find('.modal-body input').val(recipient)
-})
+		}
 	});
 });
 
