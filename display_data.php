@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 <?php
 $connection= new mysqli("localhost","root","","aduan");
-$query = "SELECT * FROM aduan_tb ORDER BY id DESC";
+$query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
 $result = mysqli_query($connection, $query);
 session_start();
 
@@ -237,21 +237,16 @@ session_start();
                                     </thead>
                                     <tbody>
                                     <?php
-                                            while ($row = mysqli_fetch_array($result)) {
-                                                $view = $row["view"];
-                                                echo '  
-                                                        <tr>  
-                                                                <td>' . $row["Nama_Pengadu"] . '</td>
-                                                                <td>' . $row["No_Tel"] . '</td>  
-                                                                <td>' . $row["Email"] . '</td>  
-                                                                <td>' . $row["Aduan_Info"] . '</td> 
-                                                                <td><a class="btn btn-default" href="' . $view . '" target="_blank">View</a></td>
-                                                                <td><a class="btn btn-primary" href="edit_content.php?edit=' . $row["Aduan_ID"] . '">Update</a></td>
-                                                                <td><a class="btn btn-danger" href="display_data.php?del=' . $row["Aduan_ID"] . '">Delete</a></td>
-                                                        </tr>  
-                                                        ';
-                                            }
-                                    ?>
+                                        while ($row = mysqli_fetch_assoc($result)) {                                                                
+                                        echo"<tr>";                    
+                                                echo "<td>"  . $row['Nama_Pengadu'] . "</td>";
+                                                echo "<td>"  . $row['Email'] . "</td>";
+                                                echo "<td>"  . $row['No_Tel'] . "</td>";
+                                                echo "<td>"  . $row['Aduan_Info'] . "</td>";
+                                                echo "<td>"  . $row['Status_ID'] . "</td>";
+                                        echo"</tr>";
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                                 </div>
