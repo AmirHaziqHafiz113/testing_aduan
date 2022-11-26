@@ -54,8 +54,7 @@ include_once('header.php');
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="display_data.php" class="text-muted">Home</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -106,7 +105,7 @@ include_once('header.php');
                                                 echo "<td><center>
                                                 <a class='btn btn-info' data-toggle='modal' data-target='#exampleModal' style='color:white'>View</a>&nbsp;&nbsp;
                                                 <a class='btn btn-danger' href=''>Delete</a>&nbsp;&nbsp;
-                                                <a class='btn btn-primary' href=''>Insert</a></center></td>"; 
+                                                <a class='btn btn-primary' href='form.php'>Insert</a></center></td>"; 
                                         echo"</tr>";
                                         }
                                         ?>
@@ -136,12 +135,24 @@ include_once('header.php');
                     <div class="modal-body">
                         <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label" >Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="recipient-name" class="col-form-label" >Nama Pengadu:</label>
+                            <input type="text" class="form-control" id="recipient-name" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <label for="message-text" class="col-form-label" >No Telefon:</label>
+                            <textarea class="form-control" id="message-text" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label" >Maklumat aduan:</label>
+                            <input type="text" class="form-control" id="recipient-name" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label" >Langkah Pencegahan:</label>
+                            <input type="text" class="form-control" id="recipient-name" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label" >Langkah Pembetulan:</label>
+                            <input type="text" class="form-control" id="recipient-name" readonly>
                         </div>
                         </form>
                     </div>
@@ -151,16 +162,6 @@ include_once('header.php');
                     </div>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center text-muted">
-                All Rights Reserved by Adminmart. Designed and Developed by <a
-                    href="https://wrappixel.com">WrapPixel</a>.
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
