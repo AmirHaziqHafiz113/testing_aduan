@@ -9,7 +9,7 @@ $connection= new mysqli("localhost","root","","aduan");
 
     $username= $_REQUEST['user']; 
     $password=$_REQUEST['password'];
-    $query="SELECT * from users WHERE U_Name='$username' AND U_Password='$password'";
+    $query="SELECT * from users WHERE U_Name='$username' AND password='$password'";
 	$result= mysqli_query($connection,$query);
 	$empty= mysqli_num_rows($result);
 
