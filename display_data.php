@@ -143,30 +143,35 @@ include_once('header.php');
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label" >Nama Pengadu:</label>
-                            <input type="text" class="form-control" id="recipient-name" readonly>
+                        <div class="modal-body">
+                        <?php  
+                                {
+                                    echo"<form>";
+                                    echo"<div class='form-group'>";
+                                        echo"<label for='recipient-name' class='col-form-label'>Nama Pengadu:</label>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' ".$row['Nama_Pengadu'].">";
+                                    echo"</div>";
+                                    echo"<div class='form-group'>";
+                                        echo"<label for='recipient-name' class='col-form-label'>Email:</label>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Email']."'>";
+                                    echo"</div>";
+                                    echo"<div class='form-group'>";
+                                        echo"<label for='recipient-name' class='col-form-label'>No. Telefon Pengadu:</label>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['No_Tel']."'>";
+                                    echo"</div>";
+                                    echo"<div class='form-group'>";
+                                        echo"<label for='recipient-name' class='col-form-label'>Info Aduan:</label>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Aduan_Info']."'>";
+                                    echo"</div>";
+                                    echo"<div class='form-group'>";
+                                        echo"<label for='recipient-name' class='col-form-label'>Status:</label>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row1['Description']."' readonly>";
+                                    echo"</div>";
+                                echo"</form>";
+                                }
+                            ?>
+
                         </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label" >No Telefon:</label>
-                            <textarea class="form-control" id="message-text" readonly></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label" >Maklumat aduan:</label>
-                            <input type="text" class="form-control" id="recipient-name" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label" >Langkah Pencegahan:</label>
-                            <input type="text" class="form-control" id="recipient-name" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label" >Langkah Pembetulan:</label>
-                            <input type="text" class="form-control" id="recipient-name" readonly>
-                        </div>
-                        </form>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>

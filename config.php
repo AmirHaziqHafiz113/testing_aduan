@@ -23,7 +23,7 @@ if($empty==0){
 
 else {  
     $_SESSION['sessionname']=$username;
-    echo "<script>alert('WELCOME .$username. to aduan'); window.location.href='display_data.php'; </script>";
+    echo "<script>alert('WELCOME $username to aduan'); window.location.href='display_data.php'; </script>";
 
 }
 ?>

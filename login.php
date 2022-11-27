@@ -40,7 +40,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputU_Name" class="sr-only" >UserName</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="text" id="exampleInputU_Name" name="user" class="form-control input-shadow" placeholder="Enter UserName">
+				  <input type="text" id="exampleInputU_Name" name="user" class="form-control input-shadow" placeholder="Enter Username" required> 
 				  <div class="form-control-position">
 					  <i class="icon-user"></i>
 				  </div>
@@ -49,7 +49,7 @@
 			  <div class="form-group">
 			  <label for="exampleInputPassword" class="sr-only" >Password</label>
 			   <div class="position-relative has-icon-right">
-				  <input type="password" name="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
+				  <input type="password" name="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password" required>
 				  <div class="form-control-position">
 					  <i class="icon-lock"></i>
 				  </div>
