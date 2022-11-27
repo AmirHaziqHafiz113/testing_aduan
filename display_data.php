@@ -95,7 +95,18 @@ include_once('header.php');
                                         FROM status
                                         WHERE Status_ID = ".$row['Status_ID'].";";
                                         $result1 = mysqli_query($connection, $query1);
-                                        $row1 = mysqli_fetch_assoc($result1);                                                  
+                                        $row1 = mysqli_fetch_assoc($result1);  
+                                        if (isset($_GET['del'])) {
+                                            $del_id = $_GET['del'];
+                                            $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
+                                            $run_delete = mysqli_query($connection, $delete);
+                                            if ($run_delete === true) {
+                                                echo "<script>window.open('display_data.php','_self');</script>";
+                                            } else {
+                                                echo "Failed, try again.";
+                                            }
+                                        }
+                                                
                                         echo"<tr>";                    
                                                 echo "<td>"  . $row['Nama_Pengadu'] . "</td>";
                                                 echo "<td>"  . $row['Email'] . "</td>";
@@ -104,7 +115,7 @@ include_once('header.php');
                                                 echo "<td>"  . $row1['Description'] . "</td>";
                                                 echo "<td><center>
                                                 <a class='btn btn-info' data-toggle='modal' data-target='#exampleModal' style='color:white'>View</a>&nbsp;&nbsp;
-                                                <a class='btn btn-danger' href=''>Delete</a>&nbsp;&nbsp;
+                                                <a class='btn btn-danger' href='display_data.php?del=".$row['Aduan_ID']."'>Delete</a>&nbsp;&nbsp;
                                                 <a class='btn btn-primary' href='form.php'>Insert</a></center></td>"; 
                                         echo"</tr>";
                                         }
