@@ -145,23 +145,28 @@ include_once('header.php');
                     </div>
                         <div class="modal-body">
                         <?php  
+                            $query = "SELECT * 
+                            FROM aduan_tb 
+                            ORDER BY Aduan_ID DESC";
+                            $result = mysqli_query($connection, $query);
+                            $row = mysqli_fetch_assoc($result);
                                 {
                                     echo"<form>";
                                     echo"<div class='form-group'>";
-                                        echo"<label for='recipient-name' class='col-form-label'>Nama Pengadu:</label>";
-                                        echo"<input type='text' class='form-control' id='recipient-name' ".$row['Nama_Pengadu'].">";
+                                        echo"<label for='recipient-name' class='col-form-label'>Nama_Pengadu:</label>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Nama_Pengadu']."'readonly>";
                                     echo"</div>";
                                     echo"<div class='form-group'>";
                                         echo"<label for='recipient-name' class='col-form-label'>Email:</label>";
-                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Email']."'>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Email']."'readonly>";
                                     echo"</div>";
                                     echo"<div class='form-group'>";
                                         echo"<label for='recipient-name' class='col-form-label'>No. Telefon Pengadu:</label>";
-                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['No_Tel']."'>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['No_Tel']."'readonly>";
                                     echo"</div>";
                                     echo"<div class='form-group'>";
                                         echo"<label for='recipient-name' class='col-form-label'>Info Aduan:</label>";
-                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Aduan_Info']."'>";
+                                        echo"<input type='text' class='form-control' id='recipient-name' value='".$row['Aduan_Info']."'readonly>";
                                     echo"</div>";
                                     echo"<div class='form-group'>";
                                         echo"<label for='recipient-name' class='col-form-label'>Status:</label>";

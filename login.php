@@ -57,7 +57,11 @@
 			  </div>
 			</div>
 			 <button type='submit' class="btn btn-light btn-block" name="login-btn">Sign In</button>
-			</div>
+			<br>
+      <a href='index.php'>
+        <button type='button' class="btn btn-light btn-block" name="login-btn">Back</button>                  
+      </a>  
+      </div> 
 			 </form>
 		   </div>
 		  </div>
