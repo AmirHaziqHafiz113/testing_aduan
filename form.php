@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+<?php
+$connection = new mysqli("localhost", "root", "", "aduan");
+$query = "SELECT * 
+FROM aduan_tb 
+ORDER BY Aduan_ID DESC";
+$result = mysqli_query($connection, $query);
+session_start();
+if (!isset($_SESSION['sessionname'])) {
+    echo "<script>window.open('login.php','_self')</script>";
+}
+?>
 
 <head>
     <meta charset="utf-8">
@@ -34,10 +45,11 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-    <?php
-include_once('header.php');
-?>
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+        <?php
+    include_once('header.php');
+    ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -51,11 +63,13 @@ include_once('header.php');
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Isi pencegahan dan pembetulan</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Isi pencegahan dan
+                            pembetulan</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="display_data.php" class="text-muted">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="display_data.php" class="text-muted">Home</a>
+                                    </li>
                                     <li class="breadcrumb-item text-muted active" aria-current="page">Insert</li>
                                 </ol>
                             </nav>
@@ -84,8 +98,7 @@ include_once('header.php');
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,8 +106,7 @@ include_once('header.php');
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,8 +114,7 @@ include_once('header.php');
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,8 +122,7 @@ include_once('header.php');
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" readonly>
                                                 </div>
                                             </div>
                                         </div>
