@@ -95,6 +95,7 @@ if (!isset($_SESSION['sessionname'])) {
                                     </thead>
                                     <tbody>
                                         <?php
+                        
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             $query1 = "SELECT Description 
                                         FROM status
@@ -119,7 +120,7 @@ if (!isset($_SESSION['sessionname'])) {
                                             echo "<td>" . $row['Aduan_Info'] . "</td>";
                                             echo "<td>" . $row1['Description'] . "</td>";
                                             echo "<td><center>
-                                                <a class='btn btn-info' data-toggle='modal' data-target='#exampleModal' style='color:white'>View</a>&nbsp;&nbsp;
+                                                <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] .  ");' style='color:white'>View</a>&nbsp;&nbsp;
                                                 <a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;
                                                 <a class='btn btn-primary' href='form.php'>Insert</a></center></td>";
                                             echo "</tr>";
@@ -135,58 +136,11 @@ if (!isset($_SESSION['sessionname'])) {
             <!-- ============================================================== -->
             <!-- End PAge Content -->
             <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <?php
-                        while ($row = mysqli_fetch_assoc($result))
-                            $query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
-                        $result = mysqli_query($connection, $query);
-                        $row = mysqli_fetch_assoc($result); {
-                            echo "<form>";
-                            echo "<div class='form-group'>";
-                            echo "<label for='recipient-name' class='col-form-label'>Nama_Pengadu:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-name' value='" . $row['Nama_Pengadu'] . "'readonly>";
-                            echo "</div>";
-                            echo "<div class='form-group'>";
-                            echo "<label for='recipient-name' class='col-form-label'>Email:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-name' value='" . $row['Email'] . "'readonly>";
-                            echo "</div>";
-                            echo "<div class='form-group'>";
-                            echo "<label for='recipient-name' class='col-form-label'>No. Telefon Pengadu:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-name' value='" . $row['No_Tel'] . "'readonly>";
-                            echo "</div>";
-                            echo "<div class='form-group'>";
-                            echo "<label for='recipient-name' class='col-form-label'>Info Aduan:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-name' value='" . $row['Aduan_Info'] . "'readonly>";
-                            echo "</div>";
-                            echo "<div class='form-group'>";
-                            echo "<label for='recipient-name' class='col-form-label'>Status:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-name' value='" . $row1['Description'] . "' readonly>";
-                            echo "</div>";
-                            echo "</form>";
-                        }
-                        ?>
+        </div> 
+        
+        <div class="modal fade text-center" name="exampleModal"  id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+</div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- ============================================================== -->
     <!-- End Page wrapper  -->
@@ -261,6 +215,22 @@ if (!isset($_SESSION['sessionname'])) {
                 }
             });
         });
+
+        function modDisp(id){
+            /*$("#exampleModal #bookId").val(id.toString());
+            $("#exampleModal").modal('show'); */
+           /* $('#exampleModal').load('modal.php?id=2',function(){
+            $('#exampleModal').modal('show');
+            });*/
+
+            $('#exampleModal').load("modal.php?did=" + id , function (response, status, xhr) {
+    	        if (status == "success") {
+    		        $('#exampleModal').modal('show');
+    	        }
+            });
+
+        }
+
 
     </script>
 </body>
