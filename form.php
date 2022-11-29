@@ -2,14 +2,23 @@
 <html dir="ltr" lang="en">
 <?php
 $connection = new mysqli("localhost", "root", "", "aduan");
-$query = "SELECT * 
-FROM aduan_tb 
-ORDER BY Aduan_ID DESC";
-$result = mysqli_query($connection, $query);
+// $query = "SELECT * 
+// FROM aduan_tb 
+// ORDER BY Aduan_ID DESC";
+// $result = mysqli_query($connection, $query);
 session_start();
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
+
+if($_GET['id']){
+    $id = $_GET['id'];
+    $q = "SELECT * FROM aduan_tb WHERE Aduan_ID=$id";
+    $result = mysqli_query($connection, $q);
+
+    $row = mysqli_fetch_array($result);
+}
+
 ?>
 
 <head>
@@ -98,7 +107,7 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['Aduan_ID'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,7 +115,7 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['Nama_Pengadu'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +123,7 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['No_Tel'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,7 +131,7 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" readonly>
+                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['Email'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
