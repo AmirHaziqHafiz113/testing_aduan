@@ -1,4 +1,3 @@
-
 <?php
 $id = $_GET["did"];
 $connection = new mysqli("localhost", "root", "", "aduan");

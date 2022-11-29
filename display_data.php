@@ -122,7 +122,7 @@ if (!isset($_SESSION['sessionname'])) {
                                             echo "<td><center>
                                                 <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] .  ");' style='color:white'>View</a>&nbsp;&nbsp;
                                                 <a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;
-                                                <a class='btn btn-primary' href='form.php'>Insert</a></center></td>";
+                                                <a class='btn btn-primary' href='form.php?edit" .$Aduan_ID1 = $row['Aduan_ID']."'>Insert</a></center></td>";
                                             echo "</tr>";
                                         }
                                         ?>

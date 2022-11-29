@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <?php
+$Aduan_ID2 = $_GET['Aduan_ID1'];
 $connection = new mysqli("localhost", "root", "", "aduan");
 $query = "SELECT * 
 FROM aduan_tb 
-ORDER BY Aduan_ID DESC";
+where Aduan_ID = $Aduan_ID2";
 $result = mysqli_query($connection, $query);
+$row = mysqli_fetch_array($result);
 session_start();
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
