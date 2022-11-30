@@ -12,6 +12,17 @@ session_start();
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
+<<<<<<< Updated upstream
+=======
+
+if ($_GET['id']) {
+    $id = $_GET['id'];
+    $q = "SELECT * FROM aduan_tb WHERE Aduan_ID=$id";
+    $result = mysqli_query($connection, $q);
+    $row = mysqli_fetch_array($result);
+}
+
+>>>>>>> Stashed changes
 ?>
 
 <head>
@@ -50,8 +61,8 @@ if (!isset($_SESSION['sessionname'])) {
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <?php
-    include_once('header.php');
-    ?>
+        include_once('header.php');
+        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -94,21 +105,19 @@ if (!isset($_SESSION['sessionname'])) {
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Section A</h4>
-                                <form action="#">
+                                <form action="" method='post'>
                                     <div class="form-body">
                                         <label>Aduan </label>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <label>Nama Pengadu</label>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
+<<<<<<< Updated upstream
                                                     <input type="text" class="form-control" placeholder="" readonly>
+=======
+                                                    <input type="text" class="form-control" placeholder=""
+                                                        value="<?php echo $row['Nama_Pengadu'] ?>" readonly>
+>>>>>>> Stashed changes
                                                 </div>
                                             </div>
                                         </div>
@@ -116,7 +125,12 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
+<<<<<<< Updated upstream
                                                     <input type="text" class="form-control" placeholder="" readonly>
+=======
+                                                    <input type="text" class="form-control" placeholder=""
+                                                        value="<?php echo $row['No_Tel'] ?>" readonly>
+>>>>>>> Stashed changes
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +138,25 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
+<<<<<<< Updated upstream
                                                     <input type="text" class="form-control" placeholder="" readonly>
+=======
+                                                    <input type="text" class="form-control" placeholder=""
+                                                        value="<?php echo $row['Email'] ?>" readonly>
+>>>>>>> Stashed changes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label>Info aduan </label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+<<<<<<< Updated upstream
+                                                    <input type="text" class="form-control" placeholder="" readonly>
+=======
+                                                    <input type="text" class="form-control" placeholder=""
+                                                        value="<?php echo $row['Aduan_Info'] ?>" readonly>
+>>>>>>> Stashed changes
                                                 </div>
                                             </div>
                                         </div>
@@ -133,7 +165,7 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" name='pencegahan'
                                                         placeholder="Isi langkah pencegahan" required>
                                                 </div>
                                             </div>
@@ -142,7 +174,7 @@ if (!isset($_SESSION['sessionname'])) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" name="pembetulan"
                                                         placeholder="Isi langkah pembetulan" required>
                                                 </div>
                                             </div>
@@ -150,7 +182,7 @@ if (!isset($_SESSION['sessionname'])) {
                                     </div>
                                     <div class="form-actions">
                                         <div class="text-right">
-                                            <button type="submit" class="btn btn-info">Submit</button>
+                                            <button type="submit" class="btn btn-info" name='update-btn'>Submit</button>
                                             <button type="reset" class="btn btn-dark">Reset</button>
                                         </div>
                                     </div>
@@ -188,6 +220,25 @@ if (!isset($_SESSION['sessionname'])) {
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
+
+    <?php
+    if (isset($_POST['update-btn'])) {
+        $epencegahan = $_POST['pencegahan'];
+        $epembetulan = $_POST['pembetulan'];
+        $update = "Update pencegahan SET Description='$epencegahan' WHERE Aduan_ID=$id";
+        $update2 = "Update pembetulan SET Description='$epencegahan' WHERE Aduan_ID=$id";
+
+        $run_update = mysqli_query($connection, $update);
+        $run_update2 = mysqli_query($connection, $update2);
+        if ($run_update && $run_update2) {
+            echo "<script>alert('Data has been updated!')</script>";
+            echo "<script>window.open('display_data.php','_self')</script>";
+        } else {
+            echo "<script>alert('Data has not been updated!')</script>";
+            echo "<script>window.open('display_data.php','_self')</script>";
+        }
+    }
+    ?>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
