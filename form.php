@@ -13,10 +13,18 @@ if (!isset($_SESSION['sessionname'])) {
 
 if($_GET['id']){
     $id = $_GET['id'];
-    $q = "SELECT * FROM aduan_tb WHERE Aduan_ID=$id";
+    $q = "SELECT * FROM aduan_tb WHERE Aduan_ID = $id";
     $result = mysqli_query($connection, $q);
 
     $row = mysqli_fetch_array($result);
+
+    $q_pembetulan = "SELECT * FROM pembetulan WHERE Aduan_ID = $id";
+    $result_pembetulan = mysqli_query($connection, $q_pembetulan);
+    $row_pembetulan = mysqli_fetch_array($result_pembetulan);
+
+    $q_pencegahan = "SELECT * FROM pencegahan WHERE Aduan_ID = $id";
+    $result_pencegahan = mysqli_query($connection, $q_pencegahan);
+    $row_pencegahan = mysqli_fetch_array($result_pencegahan);
 }
 
 ?>
@@ -107,7 +115,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['Aduan_ID'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="Aduan_ID" placeholder="" value="<?php echo $row['Aduan_ID'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +123,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['Nama_Pengadu'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="Nama_Pengadu" placeholder="" value="<?php echo $row['Nama_Pengadu'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,7 +131,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['No_Tel'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="No_Tel" placeholder="" value="<?php echo $row['No_Tel'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -131,7 +139,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="" value="<?php echo $row['Email'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="Email" placeholder="" value="<?php echo $row['Email'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,8 +148,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Isi langkah pencegahan" required>
+                                                    <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?php echo $row_pencegahan['Description'] ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -149,8 +156,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Isi langkah pembetulan" required>
+                                                    <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?php echo $row_pembetulan['Description'] ?>" required>
                                                 </div>
                                             </div>
                                         </div>

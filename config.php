@@ -10,6 +10,8 @@ if ($connection->connect_error) {
 $password = $_REQUEST['password'];
 $query = "SELECT * from users WHERE U_Name='$username' AND password='$password'";
 $result = mysqli_query($connection, $query);
+$row = mysqli_fetch_array($result);
+
 $empty = mysqli_num_rows($result);
 
 
@@ -20,6 +22,7 @@ if ($empty == 0) {
     </script>';
 } else {
     $_SESSION['sessionname'] = $username;
+    $_SESSION['id'] = $row['id'];
     echo "<script>alert('WELCOME $username to aduan'); window.location.href='display_data.php'; </script>";
 
 }
