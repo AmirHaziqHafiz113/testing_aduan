@@ -149,7 +149,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?= $row_pencegahan['Description'] ? $row_pencegahan['Description'] : '' ?>" required>
+                                                    <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +157,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?= $row_pembetulan['Description'] ? $row_pembetulan['Description'] : '' ?>" required>
+                                                    <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?= isset($row_pembetulan['Description']) ? $row_pembetulan['Description'] : '' ?>" required>
                                                 </div>
                                             </div>
                                         </div>
