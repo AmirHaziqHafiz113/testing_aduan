@@ -109,7 +109,7 @@ if($_GET['id']){
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Section A</h4>
-                                <form action="#">
+                                <form action="update.php" method="POST">
                                     <div class="form-body">
                                         <label>Aduan </label>
                                         <div class="row">
@@ -119,6 +119,7 @@ if($_GET['id']){
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" name="user_id" value="<?= $_SESSION['id']  ?>">
                                         <label>Nama Pengadu</label>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -148,7 +149,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?php echo $row_pencegahan['Description'] ?>" required>
+                                                    <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?= $row_pencegahan['Description'] ? $row_pencegahan['Description'] : '' ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,7 +157,7 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?php echo $row_pembetulan['Description'] ?>" required>
+                                                    <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?= $row_pembetulan['Description'] ? $row_pembetulan['Description'] : '' ?>" required>
                                                 </div>
                                             </div>
                                         </div>

@@ -50,11 +50,19 @@ $row_pencegahan = mysqli_fetch_array($result_pencegahan);
                             echo "</div>";
                             echo "<div class='form-group'>";
                             echo "<label for='recipient-name' class='col-form-label'>Pembetulan:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-pembetulan' value='" . $row_pembetulan['Description'] . "' readonly>";
+                            if ($row_pembetulan['Description']) {
+                                echo "<input type='text' class='form-control' id='recipient-pembetulan' value='" . $row_pembetulan['Description'] . "' readonly>";
+                            } else {
+                                echo "<input type='text' class='form-control' id='recipient-pembetulan' value='' readonly>";
+                            }
                             echo "</div>";
                             echo "<div class='form-group'>";
                             echo "<label for='recipient-name' class='col-form-label'>Pencegahan:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-pencegahan' value='" . $row_pencegahan['Description'] . "' readonly>";
+                            if ($row_pencegahan['Description']) {
+                                echo "<input type='text' class='form-control' id='recipient-pencegahan' value='" . $row_pencegahan['Description'] . "' readonly>";
+                            } else {
+                                echo "<input type='text' class='form-control' id='recipient-pencegahan' value='' readonly>";
+                            }
                             echo "</div>";
                             echo "</form>";
                         // }
