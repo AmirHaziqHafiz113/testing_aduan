@@ -162,11 +162,28 @@ if($_GET['id']){
                                             </div>
                                         </div>
                                     </div>
+                                    <h4 class="card-title">Section C</h4>
+                                        <label>Notes </label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="form-actions">
                                     <div class="form-actions">
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-info">Submit</button>
                                             <button type="reset" class="btn btn-dark">Reset</button>
                                             <a class="btn btn-success" href="display_data.php">Home</a>
+                                        </div>
+                                        <div>
+                                            <h3>Is solution working?</h3>
+                                            <label>
+                                            <input type="checkbox" class="radio" value="1" name="fooby[1][]" />Yes</label>
+                                            <label>
+                                            <input type="checkbox" class="radio" value="1" name="fooby[1][]" />No</label>
                                         </div>
                                     </div>
                                 </form>
@@ -227,6 +244,23 @@ if($_GET['id']){
     <script src="dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
+    <script>
+        $("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+    </script>
 </body>
 
 </html>
