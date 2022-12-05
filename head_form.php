@@ -6,7 +6,10 @@ $connection = new mysqli("localhost", "root", "", "aduan");
 // FROM aduan_tb 
 // ORDER BY Aduan_ID DESC";
 // $result = mysqli_query($connection, $query);
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }

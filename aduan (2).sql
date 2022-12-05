@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2022 at 01:08 PM
+-- Generation Time: Dec 05, 2022 at 10:07 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -30,11 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `aduan_tb` (
   `Aduan_ID` int(50) NOT NULL,
   `Category_ID` int(50) DEFAULT NULL,
-  `Status_ID` int(50) DEFAULT NULL,
+  `Status_Desc` varchar(255) DEFAULT NULL,
   `Nama_Pengadu` varchar(100) NOT NULL,
   `No_Tel` int(20) NOT NULL,
   `Email` varchar(100) NOT NULL,
+  `langkah` varchar(255) DEFAULT NULL,
   `Aduan_Info` varchar(1000) NOT NULL,
+  `complaint_cond` varchar(50) DEFAULT NULL,
   `Timestamp_New` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Timestamp_Pending` datetime DEFAULT NULL,
   `Timestamp_In_Progress` datetime DEFAULT NULL,
@@ -46,8 +48,8 @@ CREATE TABLE `aduan_tb` (
 -- Dumping data for table `aduan_tb`
 --
 
-INSERT INTO `aduan_tb` (`Aduan_ID`, `Category_ID`, `Status_ID`, `Nama_Pengadu`, `No_Tel`, `Email`, `Aduan_Info`, `Timestamp_New`, `Timestamp_Pending`, `Timestamp_In_Progress`, `Timestamp_Closed`, `Timestamp_Amend`) VALUES
-(70001, 30001, 40001, 'Amir Haziq', 1110894397, 'amirhaziqhafiz113@gmail.com', 'Testing', '2022-10-05 03:05:36', '2022-10-05 05:04:31', '2022-10-05 05:04:31', '2022-10-05 05:04:31', '2022-10-05 05:04:31');
+INSERT INTO `aduan_tb` (`Aduan_ID`, `Category_ID`, `Status_Desc`, `Nama_Pengadu`, `No_Tel`, `Email`, `langkah`, `Aduan_Info`, `complaint_cond`, `Timestamp_New`, `Timestamp_Pending`, `Timestamp_In_Progress`, `Timestamp_Closed`, `Timestamp_Amend`) VALUES
+(70001, 30001, 'Pending', 'Amir Haziq', 1110894397, 'amirhaziqhafiz113@gmail.com', '', 'Testing', 'Amend', '2022-12-05 21:07:18', '2022-10-05 05:04:31', '2022-12-05 21:59:56', '2022-12-05 22:06:51', '2022-12-05 22:07:18');
 
 -- --------------------------------------------------------
 
@@ -125,6 +127,16 @@ CREATE TABLE `permissions` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `description`) VALUES
+(5, 'Verify', 'verify reports'),
+(6, 'Edit', 'edit reports'),
+(7, 'Delete', 'delete reports'),
+(9, 'Complaint', 'complaint');
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +148,17 @@ CREATE TABLE `permission_role` (
   `role_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `permission_role`
+--
+
+INSERT INTO `permission_role` (`id`, `role_id`, `permission_id`) VALUES
+(2, 4, 5),
+(9, 4, 6),
+(10, 4, 7),
+(12, 4, 9),
+(13, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -154,8 +177,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
-(2, 'Admin', 'Administrator'),
-(3, 'test', 'hgehe');
+(4, 'SuperAdmin', 'Super Admin'),
+(5, 'HeadDepartment', 'Head Department');
 
 -- --------------------------------------------------------
 
@@ -175,7 +198,10 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`Status_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(40001, 'Pending', 'Amir Haziq', '2022-10-03 07:56:38');
+(40001, 'Pending', 'Amir Haziq', '2022-10-03 07:56:38'),
+(40002, 'In Progress', 'Amir Haziq', '2022-12-05 19:51:25'),
+(40003, 'Closed', 'Amir Haziq', '2022-12-05 19:43:23'),
+(40004, 'Amend', 'Amir Haziq', '2022-12-05 19:43:46');
 
 -- --------------------------------------------------------
 
@@ -198,7 +224,28 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `U_Name`, `email`, `password`, `U_Dept`, `Timestamp`, `Add_By`) VALUES
-(10001, 'Amir Haziq Hafiz Muhammad', 'finejake113@gmail.com', 'abcd1234', 'TMK', '2022-12-05 10:14:28', 'Amir Haziq Hafiz Muhammad');
+(10001, 'Amir Haziq Hafiz Muhammad', 'finejake113@gmail.com', '$2y$10$dmzr0uFyN4ctJBKFhGcb1OA9HalrtOMCnVWll8sBXhcFBNdmCDwGO', 'TMK', '2022-12-05 18:00:51', 'Amir Haziq Hafiz Muhammad'),
+(10002, 'Head Department', 'headdeparment@gmail.com', '$2y$10$dmzr0uFyN4ctJBKFhGcb1OA9HalrtOMCnVWll8sBXhcFBNdmCDwGO', 'DDT', '2022-12-05 17:57:26', 'Amir Haziq Hafiz Muhammad');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_role`
+--
+
+CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_role`
+--
+
+INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
+(3, 10001, 4),
+(4, 10002, 5);
 
 --
 -- Indexes for dumped tables
@@ -209,8 +256,7 @@ INSERT INTO `users` (`id`, `U_Name`, `email`, `password`, `U_Dept`, `Timestamp`,
 --
 ALTER TABLE `aduan_tb`
   ADD PRIMARY KEY (`Aduan_ID`),
-  ADD KEY `Category_ID` (`Category_ID`,`Status_ID`),
-  ADD KEY `Status_ID` (`Status_ID`);
+  ADD KEY `Category_ID` (`Category_ID`);
 
 --
 -- Indexes for table `category`
@@ -268,6 +314,14 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_role_fk` (`role_id`),
+  ADD KEY `user_fk` (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -299,31 +353,37 @@ ALTER TABLE `pencegahan`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `permission_role`
 --
 ALTER TABLE `permission_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `Status_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40002;
+  MODIFY `Status_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40005;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10002;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10003;
+
+--
+-- AUTO_INCREMENT for table `user_role`
+--
+ALTER TABLE `user_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -333,8 +393,7 @@ ALTER TABLE `users`
 -- Constraints for table `aduan_tb`
 --
 ALTER TABLE `aduan_tb`
-  ADD CONSTRAINT `aduan_tb_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `aduan_tb_ibfk_2` FOREIGN KEY (`Status_ID`) REFERENCES `status` (`Status_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `aduan_tb_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pembetulan`
@@ -356,6 +415,13 @@ ALTER TABLE `pencegahan`
 ALTER TABLE `permission_role`
   ADD CONSTRAINT `permission_role_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `permission_role_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`);
+
+--
+-- Constraints for table `user_role`
+--
+ALTER TABLE `user_role`
+  ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `user_role_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

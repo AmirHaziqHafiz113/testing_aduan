@@ -3,10 +3,13 @@
 <?php
 $connection = new mysqli("localhost", "root", "", "aduan");
 $query = "SELECT * 
-FROM aduan_tb 
-ORDER BY Aduan_ID DESC";
+FROM permissions 
+ORDER BY name DESC";
 $result = mysqli_query($connection, $query);
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
@@ -80,6 +83,12 @@ if (!isset($_SESSION['sessionname'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: right;">
+                                    <a class='btn btn-success' onclick='modDisp("permission");' style='color:white'>Add Permission</a>
+                                </div>
+                            </div>
+                            <br>
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" cellspacing="0"
                                     width="100%">
@@ -91,7 +100,32 @@ if (!isset($_SESSION['sessionname'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php
+                                            if ($result) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    $query1 = "SELECT * FROM permissions";
+                                                    $result1 = mysqli_query($connection, $query1);
+                                                    $row1 = mysqli_fetch_assoc($result1);
+                                                    if (isset($_GET['del'])) {
+                                                        $del_id = $_GET['del'];
+                                                        $delete = "DELETE FROM permissions WHERE id='$del_id'";
+                                                        $run_delete = mysqli_query($connection, $delete);
+                                                        if ($run_delete === true) {
+                                                            echo "<script>alert('record deleted succesfully'); window.open('permission.php','_self');</script>";
+                                                        } else {
+                                                            echo "Failed, try again.";
+                                                        }
+                                                    }
+    
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row['name'] . "</td>";
+                                                    echo "<td>" . $row['description'] . "</td>";
+                                                    echo "<td><center>
+                                                        <a class='btn btn-danger' href='permission.php?del=" . $row['id'] . "'>Delete</a>";
+                                                    echo "</tr>";
+                                                }
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -136,9 +170,61 @@ if (!isset($_SESSION['sessionname'])) {
     <script src="assets/extra-libs/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="dist/js/pages/datatable/datatable-basic.init.js"></script>
     <script>
-      
+            $(document).ready(function () {
+                //Only needed for the filename of export files.
+                //Normally set in the title tag of your page.
+                // DataTable initialisation
+                $("#example").DataTable({
+                    dom: '<"dt-buttons"Bf><"clear">lirtp',
+                    paging: true,
+                    autoWidth: true,
+                    buttons: [
+                        "colvis",
+                        "copyHtml5",
+                        "csvHtml5",
+                        "excelHtml5",
+                        "pdfHtml5",
+                        "print"
+                    ],
+                    initComplete: function (settings, json) {
+                        $(".dt-buttons .btn-group").append(
+                            '<a id="cv" href="#">CARD VIEW</a>'
+                        );
 
-    </script>
+                        $("#cv").on("click", function () {
+                            if ($("#example").hasClass("card")) {
+                                $(".colHeader").remove();
+                            } else {
+                                var labels = [];
+                                $("#example thead th").each(function () {
+                                    labels.push($(this).text());
+                                });
+                                $("#example tbody tr").each(function () {
+                                    $(this)
+                                        .find("td")
+                                        .each(function (column) {
+                                            $("<span class='colHeader'>" + labels[column] + ":</span>").prependTo(
+                                                $(this)
+                                            );
+                                        });
+                                });
+                            }
+                            $("#example").toggleClass("card");
+
+                        });
+                    }
+                });
+            });
+
+            function modDisp(type) {
+                $('#exampleModal').load("modal_roles.php?types=" + type, function (response, status, xhr) {
+                    if (status == "success") {
+                        $('#exampleModal').modal('show');
+                    }
+                });
+
+            }
+        </script>
 </body>
 
 </html>

@@ -1,3 +1,5 @@
+    <?php include_once('middleware.php'); ?>
+    
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -89,7 +91,7 @@
                                 <img src="assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span
-                                        class="text-dark">Jason Doe</span>
+                                        class="text-dark"><?= $_SESSION['sessionname'] ?></span>
                             </a>
                         </li>
                     </ul>
@@ -115,9 +117,9 @@
                                     <a href="display_data.php" class="sidebar-link"><span class="hide-menu">List Aduan</span></a>
                                 </li>
                             </ul>
-
+                            <?php if (hasRole('SuperAdmin') === 'TRUE') { ?>
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="user" class="feather-icon">
-                                </i><span class="hide-menu">Roles & Permission </span>
+                                </i><span class="hide-menu">User Management</span>
                             </a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item">
@@ -127,9 +129,16 @@
                                     <a href="permission.php" class="sidebar-link"><span class="hide-menu">Permission</span></a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="user.php" class="sidebar-link"><span class="hide-menu">User</span></a>
+                                    <a href="roles_perm.php" class="sidebar-link"><span class="hide-menu">Roles/Permission</span></a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="user.php" class="sidebar-link"><span class="hide-menu">User Role</span></a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="user_list.php" class="sidebar-link"><span class="hide-menu">User List</span></a>
                                 </li>
                             </ul>
+                            <?php } ?>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="logout.php"
                                 aria-expanded="false"><i data-feather="log-out" class="feather-icon"></i><span

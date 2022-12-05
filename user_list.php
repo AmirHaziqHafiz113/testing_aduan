@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <?php
-include_once('middleware.php');
 $connection = new mysqli("localhost", "root", "", "aduan");
-$query = "SELECT * 
-FROM aduan_tb 
-ORDER BY Aduan_ID DESC";
+$query = "SELECT * FROM users";
+
 $result = mysqli_query($connection, $query);
-
-
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
@@ -23,7 +23,7 @@ if (!isset($_SESSION['sessionname'])) {
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="assets/images/logo2.png">
-    <title>Admin - List aduan</title>
+    <title>Admin - User List</title>
     <!-- This page plugin CSS -->
     <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -56,7 +56,7 @@ if (!isset($_SESSION['sessionname'])) {
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-7 align-self-center">
-                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Aduan</h4>
+                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">User List</h4>
                     <div class="d-flex align-items-center">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb m-0 p-0">
@@ -82,48 +82,48 @@ if (!isset($_SESSION['sessionname'])) {
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: right;">
+                                    <a class='btn btn-success' onclick='modDisp("user_list");' style='color:white'>Add User</a>
+                                </div>
+                            </div>
+                            <br>
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped table-bordered" cellspacing="0"
                                     width="100%">
                                     <thead>
                                         <tr style="text-align:center">
-                                            <th>Nama Pengadu</th>
+                                            <th>Name</th>
                                             <th>Email</th>
-                                            <th>No. Telefon Pengadu</th>
-                                            <th>Info aduan</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                            if ($result) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    $query1 = "SELECT * FROM users";
+                                                    $result1 = mysqli_query($connection, $query1);
+                                                    $row1 = mysqli_fetch_assoc($result1);
+                                                    if (isset($_GET['del'])) {
+                                                        $del_id = $_GET['del'];
+                                                        $delete = "DELETE FROM users WHERE id='$del_id'";
+                                                        $run_delete = mysqli_query($connection, $delete);
+                                                        if ($run_delete === true) {
+                                                            echo "<script>alert('record deleted succesfully'); window.open('user_list.php','_self');</script>";
+                                                        } else {
+                                                            echo "Failed, try again.";
+                                                        }
+                                                    }
 
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            if (isset($_GET['del'])) {
-                                                $del_id = $_GET['del'];
-                                                $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
-                                                $run_delete = mysqli_query($connection, $delete);
-                                                if (($run_delete === true) && (hasPermission('Delete') === 'TRUE')) {
-                                                    echo "<script>alert('record deleted succesfully'); window.open('display_data.php','_self');</script>";
-                                                } else {
-                                                    echo "Failed, try again.";
+                                                    echo "<tr>";
+                                                    echo "<td>" . $row['U_Name'] . "</td>";
+                                                    echo "<td>" . $row['email'] . "</td>";
+                                                    echo "<td><center>
+                                                            <a class='btn btn-danger' href='user.php?del=" . $row['id'] . "'>Delete</a>";
+                                                    echo "</tr>";
                                                 }
                                             }
-
-                                            echo "<tr>";
-                                            echo "<td>" . $row['Nama_Pengadu'] . "</td>";
-                                            echo "<td>" . $row['Email'] . "</td>";
-                                            echo "<td>" . $row['No_Tel'] . "</td>";
-                                            echo "<td>" . $row['Aduan_Info'] . "</td>";
-                                            echo "<td>" . $row['Status_Desc'] . "</td>";
-                                            echo "<td><center>
-                                                <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] . ");' style='color:white'>View</a>&nbsp;&nbsp;";
-                                            if (hasPermission('Delete') === 'TRUE') {
-                                                echo "<a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;";
-                                            }
-                                            echo "<a class='btn btn-primary' href='form.php?id=" . $row['Aduan_ID'] . "'>Insert</a></center></td>";
-                                            echo "</tr>";
-                                        }
                                         ?>
                                     </tbody>
                                 </table>
@@ -172,7 +172,6 @@ if (!isset($_SESSION['sessionname'])) {
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "Aduan - Form";
             // DataTable initialisation
             $("#example").DataTable({
                 dom: '<"dt-buttons"Bf><"clear">lirtp',
@@ -216,22 +215,14 @@ if (!isset($_SESSION['sessionname'])) {
             });
         });
 
-        function modDisp(id) {
-            /*$("#exampleModal #bookId").val(id.toString());
-            $("#exampleModal").modal('show'); */
-            /* $('#exampleModal').load('modal.php?id=2',function(){
-             $('#exampleModal').modal('show');
-             });*/
-
-            $('#exampleModal').load("modal.php?did=" + id, function (response, status, xhr) {
+        function modDisp(type) {
+            $('#exampleModal').load("modal_roles.php?types=" + type, function (response, status, xhr) {
                 if (status == "success") {
                     $('#exampleModal').modal('show');
                 }
             });
 
         }
-
-
     </script>
 </body>
 

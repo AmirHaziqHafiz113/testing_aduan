@@ -1,14 +1,17 @@
 <?php
-session_start();
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
 $connection = new mysqli("localhost", "root", "", "aduan");
 
 if ($connection->connect_error) {
     die("Connection failed" . $connection->connect_error);
 } else
 
-    $username = $_REQUEST['user'];
+$username = $_REQUEST['user'];
 $password = $_REQUEST['password'];
-$query = "SELECT * from users WHERE U_Name='$username' AND password='$password'";
+$query = "SELECT * from users WHERE U_Name='$username'";
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_array($result);
 
@@ -21,9 +24,12 @@ if ($empty == 0) {
         window.location="login.php";
     </script>';
 } else {
-    $_SESSION['sessionname'] = $username;
-    $_SESSION['id'] = $row['id'];
-    echo "<script>alert('WELCOME $username to aduan'); window.location.href='display_data.php'; </script>";
-
+    if (password_verify($password, $row['password'])) {
+        $_SESSION['sessionname'] = $username;
+        $_SESSION['id'] = $row['id'];
+        echo "<script>alert('WELCOME $username to aduan'); window.location.href='display_data.php'; </script>";
+    } else {
+        echo '<script> alert("password salah"); window.location="login.php";</script>';
+    }
 }
 ?>

@@ -2,9 +2,10 @@
 <html dir="ltr" lang="en">
     <?php
         $connection = new mysqli("localhost", "root", "", "aduan");
-        $query = "SELECT * 
-        FROM roles 
-        ORDER BY name DESC";
+        $query = "SELECT permission_role.id, permission_role.role_id, permission_role.permission_id, permissions.name AS perm_name, roles.name as role_name
+        FROM permission_role INNER JOIN 
+        permissions ON permission_role.permission_id = permissions.id INNER JOIN
+        roles ON permission_role.role_id = roles.id";
         $result = mysqli_query($connection, $query);
         if(!isset($_SESSION)) 
         { 
@@ -13,6 +14,7 @@
         if (!isset($_SESSION['sessionname'])) {
             echo "<script>window.open('login.php','_self')</script>";
         }
+        
     ?>
 
     <head>
@@ -24,7 +26,7 @@
         <meta name="author" content="">
         <!-- Favicon icon -->
         <link rel="icon" type="image/png" href="assets/images/logo2.png">
-        <title>Admin - Roles</title>
+        <title>Admin - Roles & Permission</title>
         <!-- This page plugin CSS -->
         <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
         <!-- Custom CSS -->
@@ -85,7 +87,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12" style="text-align: right;">
-                                        <a class='btn btn-success' onclick='modDisp("role");' style='color:white'>Add Role</a>
+                                        <a class='btn btn-success' onclick='modDisp("role_perm");' style='color:white'>Add Roles/Permission</a>
                                     </div>
                                 </div>
                                 <br>
@@ -95,7 +97,7 @@
                                         <thead>
                                             <tr style="text-align:center">
                                                 <th>Roles</th>
-                                                <th>Description</th>
+                                                <th>Permission</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -103,25 +105,25 @@
                                             <?php
                                                 if ($result) {
                                                     while ($row = mysqli_fetch_assoc($result)) {
-                                                        $query1 = "SELECT * FROM roles";
+                                                        $query1 = "SELECT * FROM permission_role";
                                                         $result1 = mysqli_query($connection, $query1);
                                                         $row1 = mysqli_fetch_assoc($result1);
                                                         if (isset($_GET['del'])) {
                                                             $del_id = $_GET['del'];
-                                                            $delete = "DELETE FROM roles WHERE id='$del_id'";
+                                                            $delete = "DELETE FROM permission_role WHERE id='$del_id'";
                                                             $run_delete = mysqli_query($connection, $delete);
                                                             if ($run_delete === true) {
-                                                                echo "<script>alert('record deleted succesfully'); window.open('roles.php','_self');</script>";
+                                                                echo "<script>alert('record deleted succesfully'); window.open('roles_perm.php','_self');</script>";
                                                             } else {
                                                                 echo "Failed, try again.";
                                                             }
                                                         }
 
                                                         echo "<tr>";
-                                                        echo "<td>" . $row['name'] . "</td>";
-                                                        echo "<td>" . $row['description'] . "</td>";
+                                                        echo "<td>" . $row['role_name'] . "</td>";
+                                                        echo "<td>" . $row['perm_name'] . "</td>";
                                                         echo "<td><center>
-                                                                <a class='btn btn-danger' href='roles.php?del=" . $row['id'] . "'>Delete</a>";
+                                                                <a class='btn btn-danger' href='roles_perm.php?del=" . $row['id'] . "'>Delete</a>";
                                                         echo "</tr>";
                                                     }
                                                 }
@@ -173,6 +175,7 @@
             $(document).ready(function () {
                 //Only needed for the filename of export files.
                 //Normally set in the title tag of your page.
+
                 // DataTable initialisation
                 $("#example").DataTable({
                     dom: '<"dt-buttons"Bf><"clear">lirtp',
