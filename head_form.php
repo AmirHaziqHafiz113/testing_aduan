@@ -161,6 +161,18 @@ if($_GET['id']){
                                                 </div>
                                             </div>
                                         </div>
+                                        <h4 class="card-title">Section C</h4>
+                                        <label>Langkah berkesan? </label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                  <input type="radio" id="Ya" name="fav_language" value="Ya">
+                                                  <label for="Ya">Ya</label><br>
+                                                  <input type="radio" id="Tidak" name="fav_language" value="Tidak">
+                                                  <label for="Tidak">Tidak</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-actions">
                                         <div class="text-right">
