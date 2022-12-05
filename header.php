@@ -28,18 +28,9 @@
                         <a href="display_data.php">
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
-                                <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo icon -->
-                                <img src="assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                                <img src="assets/images/logo.png" alt="homepage" class="dark-logo" />
                             </b>
                             <!--End Logo icon -->
-                            <!-- Logo text -->
-                            <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo text -->
-                                <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                            </span>
                         </a>
                     </div>
                     <!-- ============================================================== -->
@@ -126,8 +117,8 @@
                                 aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
                                     class="hide-menu">Forms </span></a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="form-inputs.html" class="sidebar-link"><span
-                                            class="hide-menu"> Form Inputs
+                                <li class="sidebar-item"><a href="display_data.php" class="sidebar-link"><span
+                                            class="hide-menu"> List Aduan
                                         </span></a>
                                 </li>
                             </ul>

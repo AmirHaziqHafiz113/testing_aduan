@@ -21,7 +21,7 @@ if (!isset($_SESSION['sessionname'])) {
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>Admin - List aduan</title>
     <!-- This page plugin CSS -->
     <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -107,7 +107,7 @@ if (!isset($_SESSION['sessionname'])) {
                                                 $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
                                                 $run_delete = mysqli_query($connection, $delete);
                                                 if ($run_delete === true) {
-                                                    echo "<script>window.open('display_data.php','_self');</script>";
+                                                    echo "<script>alert('record deleted succesfully'); window.open('display_data.php','_self');</script>";
                                                 } else {
                                                     echo "Failed, try again.";
                                                 }
@@ -173,7 +173,7 @@ if (!isset($_SESSION['sessionname'])) {
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "Card View DataTable";
+            document.title = "Aduan - Form";
             // DataTable initialisation
             $("#example").DataTable({
                 dom: '<"dt-buttons"Bf><"clear">lirtp',

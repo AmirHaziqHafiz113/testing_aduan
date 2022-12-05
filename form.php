@@ -38,7 +38,7 @@ if($_GET['id']){
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>Admin - Isi Aduan</title>
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -166,6 +166,7 @@ if($_GET['id']){
                                         <div class="text-right">
                                             <button type="submit" class="btn btn-info">Submit</button>
                                             <button type="reset" class="btn btn-dark">Reset</button>
+                                            <a class="btn btn-success" href="display_data.php">Home</a>
                                         </div>
                                     </div>
                                 </form>
