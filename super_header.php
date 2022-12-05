@@ -111,6 +111,7 @@
                                     class="hide-menu">Forms </span></a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
                                 <li class="sidebar-item"><a href="display_data.php" class="sidebar-link"><span class="hide-menu"> List Aduan</span></a>
+                                <li class="sidebar-item"><a href="register.php" class="sidebar-link"><span class="hide-menu"> Register new admin</span></a>
                                 </li>
                             </ul>
                         </li>
