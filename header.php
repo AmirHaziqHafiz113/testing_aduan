@@ -106,11 +106,28 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="nav-small-cap"><span class="hide-menu">Item</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                aria-expanded="false"><i data-feather="file-text" class="feather-icon"></i><span
-                                    class="hide-menu">Forms </span></a>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="file-text" class="feather-icon">
+                                </i><span class="hide-menu">Forms </span>
+                            </a>
                             <ul aria-expanded="false" class="collapse  first-level base-level-line">
-                                <li class="sidebar-item"><a href="display_data.php" class="sidebar-link"><span class="hide-menu"> List Aduan</span></a>
+                                <li class="sidebar-item">
+                                    <a href="display_data.php" class="sidebar-link"><span class="hide-menu">List Aduan</span></a>
+                                </li>
+                            </ul>
+
+                            <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false"><i data-feather="user" class="feather-icon">
+                                </i><span class="hide-menu">Roles & Permission </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse  first-level base-level-line">
+                                <li class="sidebar-item">
+                                    <a href="roles.php" class="sidebar-link"><span class="hide-menu">Roles</span></a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="permission.php" class="sidebar-link"><span class="hide-menu">Permission</span></a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="user.php" class="sidebar-link"><span class="hide-menu">User</span></a>
                                 </li>
                             </ul>
                         </li>
