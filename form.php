@@ -37,7 +37,7 @@ if($_GET['id']){
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo2.png">
     <title>Admin - Isi Aduan</title>
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
