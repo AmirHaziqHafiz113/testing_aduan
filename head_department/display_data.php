@@ -21,7 +21,7 @@ if (!isset($_SESSION['sessionname'])) {
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>Admin - List aduan</title>
     <!-- This page plugin CSS -->
     <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -54,7 +54,7 @@ if (!isset($_SESSION['sessionname'])) {
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-7 align-self-center">
-                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Basic Initialisation</h4>
+                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Aduan</h4>
                     <div class="d-flex align-items-center">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb m-0 p-0">
@@ -102,16 +102,6 @@ if (!isset($_SESSION['sessionname'])) {
                                         WHERE Status_ID = " . $row['Status_ID'] . ";";
                                             $result1 = mysqli_query($connection, $query1);
                                             $row1 = mysqli_fetch_assoc($result1);
-                                            if (isset($_GET['del'])) {
-                                                $del_id = $_GET['del'];
-                                                $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
-                                                $run_delete = mysqli_query($connection, $delete);
-                                                if ($run_delete === true) {
-                                                    echo "<script>window.open('display_data.php','_self');</script>";
-                                                } else {
-                                                    echo "Failed, try again.";
-                                                }
-                                            }
 
                                             echo "<tr>";
                                             echo "<td>" . $row['Nama_Pengadu'] . "</td>";
@@ -121,7 +111,6 @@ if (!isset($_SESSION['sessionname'])) {
                                             echo "<td>" . $row1['Description'] . "</td>";
                                             echo "<td><center>
                                                 <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] . ");' style='color:white'>View</a>&nbsp;&nbsp;
-                                                <a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;
                                                 <a class='btn btn-primary' href='form.php?id=" . $row['Aduan_ID'] . "'>Insert</a></center></td>";
                                             echo "</tr>";
                                         }
@@ -173,7 +162,7 @@ if (!isset($_SESSION['sessionname'])) {
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
-            document.title = "Card View DataTable";
+            document.title = "Aduan - Form";
             // DataTable initialisation
             $("#example").DataTable({
                 dom: '<"dt-buttons"Bf><"clear">lirtp',
