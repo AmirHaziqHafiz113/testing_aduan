@@ -30,7 +30,7 @@ if (isset($_POST['submit-btn'])) {
   }
 
   // Bind the values to the placeholders in the prepared statement
-  mysqli_stmt_bind_param($stmt, "sssis", $Nama_Pengadu, $Aduan_Info, $No_Tel, $Email, $sent);
+  mysqli_stmt_bind_param($stmt, "sssss", $Nama_Pengadu, $Aduan_Info, $No_Tel, $Email, $sent);
 
   // Execute the prepared statement
   mysqli_stmt_execute($stmt);
