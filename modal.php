@@ -2,7 +2,7 @@
 <?php
 $id = $_GET["did"];
 $connection = new mysqli("localhost", "root", "", "aduan");
-$query = "SELECT A.*, B.Description As 'desc' FROM aduan_tb A JOIN status B ON B.Status_ID = A.Status_ID  WHERE Aduan_ID = $id ORDER BY Aduan_ID DESC";
+$query = "SELECT * FROM aduan_tb WHERE Aduan_ID = $id ORDER BY Aduan_ID DESC";
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_array($result);
 
@@ -46,7 +46,7 @@ $row_pencegahan = mysqli_fetch_array($result_pencegahan);
                             echo "</div>";
                             echo "<div class='form-group'>";
                             echo "<label for='recipient-name' class='col-form-label'>Status:</label>";
-                            echo "<input type='text' class='form-control' id='recipient-status' value='" . $row['desc'] . "' readonly>";
+                            echo "<input type='text' class='form-control' id='recipient-status' value='" . $row['Status_Desc'] . "' readonly>";
                             echo "</div>";
                             echo "<div class='form-group'>";
                             echo "<label for='recipient-name' class='col-form-label'>Pembetulan:</label>";
