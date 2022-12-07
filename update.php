@@ -1,4 +1,6 @@
 <?php
+include_once('middleware.php');
+
 $conn = mysqli_connect("localhost", "root", "", "aduan");
 $current_timestamp = date('Y/m/d H:i:s');
 $user_id = $_POST['user_id'];
@@ -28,9 +30,15 @@ if ($btn_val == 'Close') {
     $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_Closed = '$current_timestamp', Status_Desc = 'Closed', complaint_cond = 'Closed' WHERE Aduan_ID = $Aduan_ID";
 } else if ($btn_val == 'Amend') {
     $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_Amend = '$current_timestamp', Status_Desc = 'Pending', complaint_cond = 'Amend' WHERE Aduan_ID = $Aduan_ID";
-
 } else if ($btn_val == 'submit') {
-    $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'In Progress', complaint_cond = 'Amend' WHERE Aduan_ID = $Aduan_ID";
+    if (hasRole('HeadDepartment') == 'TRUE') {
+        $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'In Progress' WHERE Aduan_ID = $Aduan_ID";
+    } else if (hasRole('Admin') == 'TRUE') {
+        $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'Pending' WHERE Aduan_ID = $Aduan_ID";
+    } else {
+        $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp' WHERE Aduan_ID = $Aduan_ID";
+    }
+   
 }
 
 
