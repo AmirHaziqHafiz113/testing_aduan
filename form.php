@@ -8,7 +8,7 @@ if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
 
-if($_GET['id']){
+if ($_GET['id']) {
     $id = $_GET['id'];
     $q = "SELECT * FROM aduan_tb WHERE Aduan_ID = $id";
     $result = mysqli_query($connection, $q);
@@ -62,8 +62,8 @@ if($_GET['id']){
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
         <?php
-    include_once('header.php');
-    ?>
+        include_once('header.php');
+        ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -112,16 +112,19 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="Aduan_ID" placeholder="" value="<?php echo $row['Aduan_ID'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="Aduan_ID"
+                                                        placeholder="" value="<?php echo $row['Aduan_ID'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="user_id" value="<?= $_SESSION['id']  ?>">
+                                        <input type="hidden" name="user_id" value="<?= $_SESSION['id'] ?>">
                                         <label>Nama Pengadu</label>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="Nama_Pengadu" placeholder="" value="<?php echo $row['Nama_Pengadu'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="Nama_Pengadu"
+                                                        placeholder="" value="<?php echo $row['Nama_Pengadu'] ?>"
+                                                        readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -129,7 +132,8 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="No_Tel" placeholder="" value="<?php echo $row['No_Tel'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="No_Tel" placeholder=""
+                                                        value="<?php echo $row['No_Tel'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -137,7 +141,8 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="Email" placeholder="" value="<?php echo $row['Email'] ?>" readonly>
+                                                    <input type="text" class="form-control" name="Email" placeholder=""
+                                                        value="<?php echo $row['Email'] ?>" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,11 +151,17 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <?php if(((hasPermission('Edit') === 'TRUE') && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE')) { ?>
-                                                        <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>" required>
+                                                    <?php if (((hasPermission('Edit') === 'TRUE') && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin') == 'TRUE')) { ?>
+                                                    <input type="text" class="form-control" name="pencegahan"
+                                                        placeholder="Isi langkah pencegahan"
+                                                        value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>"
+                                                        required>
                                                     <?php } else { ?>
-                                                        <input type="text" class="form-control" name="pencegahan" placeholder="Isi langkah pencegahan" value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>" readonly>
-                                                    <?php }?>
+                                                    <input type="text" class="form-control" name="pencegahan"
+                                                        placeholder="Isi langkah pencegahan"
+                                                        value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>"
+                                                        readonly>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,11 +169,17 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <?php if((hasPermission('Edit') === 'TRUE' && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE')) { ?>
-                                                        <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?= isset($row_pembetulan['Description']) ? $row_pembetulan['Description'] : '' ?>" required>
+                                                    <?php if ((hasPermission('Edit') === 'TRUE' && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin') == 'TRUE')) { ?>
+                                                    <input type="text" class="form-control" name="pembetulan"
+                                                        placeholder="Isi langkah pembetulan"
+                                                        value="<?= isset($row_pembetulan['Description']) ? $row_pembetulan['Description'] : '' ?>"
+                                                        required>
                                                     <?php } else { ?>
-                                                        <input type="text" class="form-control" name="pembetulan" placeholder="Isi langkah pembetulan" value="<?= isset($row_pembetulan['Description']) ? $row_pembetulan['Description'] : '' ?>" readonly>
-                                                    <?php }?>
+                                                    <input type="text" class="form-control" name="pembetulan"
+                                                        placeholder="Isi langkah pembetulan"
+                                                        value="<?= isset($row_pembetulan['Description']) ? $row_pembetulan['Description'] : '' ?>"
+                                                        readonly>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,17 +188,25 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <?php if((hasPermission('Verify') === 'TRUE' && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE')) { ?>
-                                                        <input type="radio" id="Ya" name="langkah" value="Ya" <?php if ($row['langkah'] == 'Ya') { ?> checked <?php } ?> required>
-                                                        <label for="Ya">Ya</label><br>
-                                                        <input type="radio" id="Tidak" name="langkah" value="Tidak" <?php if ($row['langkah'] == 'Tidak') { ?> checked <?php } ?> required>
-                                                        <label for="Tidak">Tidak</label>
+                                                    <?php if ((hasPermission('Verify') === 'TRUE' && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE')) { ?>
+                                                    <input type="radio" id="Ya" name="langkah" value="Ya" <?php if
+                                                        ($row['langkah'] == 'Ya') { ?> checked
+                                                    <?php } ?> required>
+                                                    <label for="Ya">Ya</label><br>
+                                                    <input type="radio" id="Tidak" name="langkah" value="Tidak" <?php if
+                                                        ($row['langkah'] == 'Tidak') { ?> checked
+                                                    <?php } ?> required>
+                                                    <label for="Tidak">Tidak</label>
                                                     <?php } else { ?>
-                                                        <input type="radio" id="Ya" name="langkah" value="Ya" <?php if ($row['langkah'] == 'Ya') { ?> checked <?php } ?> disabled>
-                                                        <label for="Ya">Ya</label><br>
-                                                        <input type="radio" id="Tidak" name="langkah" value="Tidak" <?php if ($row['langkah'] == 'Tidak') { ?> checked <?php } ?> disabled>
-                                                        <label for="Tidak">Tidak</label>
-                                                    <?php }?>
+                                                    <input type="radio" id="Ya" name="langkah" value="Ya" <?php if
+                                                        ($row['langkah'] == 'Ya') { ?> checked
+                                                    <?php } ?> disabled>
+                                                    <label for="Ya">Ya</label><br>
+                                                    <input type="radio" id="Tidak" name="langkah" value="Tidak" <?php if
+                                                        ($row['langkah'] == 'Tidak') { ?> checked
+                                                    <?php } ?> disabled>
+                                                    <label for="Tidak">Tidak</label>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,28 +215,35 @@ if($_GET['id']){
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <?php if(($row['complaint_cond'] == null) || hasRole('SuperAdmin') == 'TRUE') { ?>
-                                                        <?php if(hasPermission('Complaint') === 'TRUE') { ?>
-                                                            <?php if($row['complaint_cond'] != 'Closed') { ?>
-                                                                <input type="submit" name="btn_val" value="Close" class="btn btn-danger">
-                                                            <?php } else { ?>
-                                                                <input type="submit" name="btn_val" value="Amend" class="btn btn-warning">
-                                                            <?php }?>
-                                                        <?php } else { ?>
-                                                            <input type="submit" name="btn_val" value="Close" class="btn btn-danger" disabled>
-                                                            &nbsp;&nbsp;&nbsp;
-                                                            <input type="submit" name="btn_val" value="Amend" class="btn btn-warning" disabled>
-                                                        <?php }?>
+                                                    <?php if (($row['complaint_cond'] == null) || hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin') == 'TRUE') { ?>
+                                                    <?php if (hasPermission('Complaint') === 'TRUE') { ?>
+                                                    <?php if ($row['complaint_cond'] != 'Closed') { ?>
+                                                    <input type="submit" name="btn_val" value="Close"
+                                                        class="btn btn-danger">
                                                     <?php } else { ?>
-                                                        <h4 <?php if ($row['complaint_cond'] == 'Amend') { ?> style='color:green;' <?php } else { ?> style='color:red;' <?php }?> >
-                                                            <?= $row['complaint_cond'] ?>
-                                                        </h4>
-                                                    <?php }?>
+                                                    <input type="submit" name="btn_val" value="Amend"
+                                                        class="btn btn-warning">
+                                                    <?php } ?>
+                                                    <?php } else { ?>
+                                                    <input type="submit" name="btn_val" value="Close"
+                                                        class="btn btn-danger" disabled>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                    <input type="submit" name="btn_val" value="Amend"
+                                                        class="btn btn-warning" disabled>
+                                                    <?php } ?>
+                                                    <?php } else { ?>
+                                                    <h4 <?php if ($row['complaint_cond'] == 'Amend') { ?>
+                                                        style='color:green;'
+                                                        <?php } else { ?> style='color:red;'
+                                                        <?php } ?> >
+                                                        <?= $row['complaint_cond'] ?>
+                                                    </h4>
+                                                    <?php } ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php if (($row['Status_Desc'] == 'Pending')) { ?>
+                                    <?php if (($row['Status_Desc'] == 'Pending' || $row['Status_Desc'] == 'New' || $row['Status_Desc'] == 'In Progress')) { ?>
                                     <div class="form-actions">
                                         <div class="text-right">
                                             <input type="submit" name="btn_val" value="submit" class="btn btn-info">
@@ -279,5 +311,3 @@ if($_GET['id']){
     <!--Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
 </body>
-
-</html>
