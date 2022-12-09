@@ -83,7 +83,7 @@ $result = mysqli_query($connect, $query);
                                                 <label for="Email" class="col-form-label">Email:</label>
                                                     <input type="email" class="form-control" name="Email" placeholder='Isi email anda' required>
                                                 </div>
-                                                <div class="g-recaptcha" id="my_captcha_form" data-sitekey="6LcAw7wiAAAAABwHXS4weO5EuyQEl5kjuC5tFDVr" required></div>
+                                                <div class="g-recaptcha" id="my_captcha_form" data-sitekey="6Lc7ImcjAAAAAKtZ__d2mnC2SR8k9WeFmeQTQ-IU" required></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" value='submit' class="btn btn-success" name="submit-btn">Send message</button>

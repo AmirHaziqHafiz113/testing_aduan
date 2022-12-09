@@ -103,7 +103,7 @@
                         <input type='text' class='form-control' id='user_name' name="user_name" placeholder="Please Input User Name" required>
                     </div>
                     <div class='form-group'>
-                        <label for='email' class='col-form-label'>Description:</label>
+                        <label for='email' class='col-form-label'>Email:</label>
                         <input type='email' class='form-control' id='email' name="email" placeholder="Please Input Email" required>
                     </div>
                     <div class='form-group'>
