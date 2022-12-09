@@ -43,7 +43,7 @@ $result = mysqli_query($connect, $query);
                 </a>
                 <nav class="pr-menu">
                     <ul>
-                        <li><a href='login.php'>Sign In</a></li>
+                        <li><a href='login.php'>Admin Login</a></li>
                     </ul>
                 </nav>
             </header>
