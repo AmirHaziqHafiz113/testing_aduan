@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2022 at 06:25 AM
+-- Generation Time: Dec 13, 2022 at 08:27 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -50,8 +50,9 @@ CREATE TABLE `aduan_tb` (
 
 INSERT INTO `aduan_tb` (`Aduan_ID`, `Category_ID`, `Status_Desc`, `Nama_Pengadu`, `No_Tel`, `Email`, `langkah`, `Aduan_Info`, `complaint_cond`, `Timestamp_New`, `Timestamp_Pending`, `Timestamp_In_Progress`, `Timestamp_Closed`, `Timestamp_Amend`) VALUES
 (70001, 30001, 'In Progress', 'Amir Haziq', 1110894397, 'amirhaziqhafiz113@gmail.com', '', 'Testing', 'Amend', '2022-12-07 10:25:48', '2022-10-05 05:04:31', '2022-12-07 11:25:48', '2022-12-05 22:06:51', '2022-12-05 22:07:18'),
-(70007, 30001, 'Pending', 'faizul', 178016870, 'faizul.ramir@gmail.com', '', 'as', NULL, '2022-12-13 05:23:14', NULL, '2022-12-13 06:23:14', NULL, NULL),
-(70008, 30003, 'Pending', 'faizul', 178016870, 'apejol@gmail.com', '', 'asdsadasdsad', NULL, '2022-12-13 05:22:46', NULL, '2022-12-13 06:22:46', NULL, NULL);
+(70007, 30001, 'Pending', 'faizul', 178016870, 'faizul.ramir@gmail.com', 'Ya', 'as', NULL, '2022-12-13 07:26:30', NULL, '2022-12-13 08:26:30', NULL, NULL),
+(70008, 30003, 'Pending', 'faizul', 178016870, 'apejol@gmail.com', 'Tidak', 'asdsadasdsad', NULL, '2022-12-13 07:22:00', NULL, '2022-12-13 08:22:00', NULL, NULL),
+(70009, 30001, 'Pending', 'faizul', 178016870, 'faizul.ramir@gmail.com', '', 'asdsad', NULL, '2022-12-13 07:27:26', NULL, '2022-12-13 08:27:26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -94,9 +95,10 @@ CREATE TABLE `pembetulan` (
 --
 
 INSERT INTO `pembetulan` (`Correction_ID`, `Aduan_ID`, `User_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(50001, 70001, 10001, 'Prepared kasperksy protection', 'Amir', '2022-10-06 02:42:50'),
-(50006, 70007, 10003, 'asdasdasdds', 'faizul', '2022-12-13 05:20:03'),
-(50007, 70008, 10003, 'asdasdasdds', 'faizul', '2022-12-13 05:05:58');
+(50001, 70001, 10001, 'asdasdasdds', 'Amir', '2022-12-13 07:19:56'),
+(50006, 70007, 10001, 'asdasdasdds', 'faizul', '2022-12-13 07:26:27'),
+(50007, 70008, 10003, 'asdasdasdds', 'faizul', '2022-12-13 05:05:58'),
+(50008, 70009, 10003, 'hehee', 'faizul', '2022-12-13 07:27:19');
 
 -- --------------------------------------------------------
 
@@ -118,9 +120,10 @@ CREATE TABLE `pencegahan` (
 --
 
 INSERT INTO `pencegahan` (`Prevention_ID`, `Aduan_ID`, `User_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(60001, 70001, 10001, 'Update PC to newer antivirus', 'Amir', '2022-10-06 02:43:02'),
-(60006, 70007, 10003, 'asdasd', 'faizul', '2022-12-13 05:20:03'),
-(60007, 70008, 10003, 'asdasd', 'faizul', '2022-12-13 05:05:58');
+(60001, 70001, 10001, 'asdasd', 'Amir', '2022-12-13 07:22:00'),
+(60006, 70007, 10001, 'asdasdasdasd', 'faizul', '2022-12-13 07:26:30'),
+(60007, 70008, 10003, 'asdasd', 'faizul', '2022-12-13 05:05:58'),
+(60008, 70009, 10003, 'hehe', 'faizul', '2022-12-13 07:27:26');
 
 -- --------------------------------------------------------
 
@@ -281,8 +284,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `pembetulan`
   ADD PRIMARY KEY (`Correction_ID`),
-  ADD KEY `Aduan_ID` (`Aduan_ID`),
-  ADD KEY `User_ID` (`User_ID`);
+  ADD KEY `Aduan_ID` (`Aduan_ID`);
 
 --
 -- Indexes for table `pencegahan`
@@ -341,7 +343,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `aduan_tb`
 --
 ALTER TABLE `aduan_tb`
-  MODIFY `Aduan_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70009;
+  MODIFY `Aduan_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70010;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -353,13 +355,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `pembetulan`
 --
 ALTER TABLE `pembetulan`
-  MODIFY `Correction_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50008;
+  MODIFY `Correction_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50009;
 
 --
 -- AUTO_INCREMENT for table `pencegahan`
 --
 ALTER TABLE `pencegahan`
-  MODIFY `Prevention_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60008;
+  MODIFY `Prevention_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60009;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -405,8 +407,7 @@ ALTER TABLE `user_role`
 -- Constraints for table `pembetulan`
 --
 ALTER TABLE `pembetulan`
-  ADD CONSTRAINT `pembetulan_ibfk_1` FOREIGN KEY (`Aduan_ID`) REFERENCES `aduan_tb` (`Aduan_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `pembetulan_ibfk_2` FOREIGN KEY (`User_ID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `pembetulan_ibfk_1` FOREIGN KEY (`Aduan_ID`) REFERENCES `aduan_tb` (`Aduan_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pencegahan`

@@ -44,8 +44,8 @@ if ($btn_val == 'Close') {
 
 
 if ((mysqli_num_rows($result_check_pembetulan) > 0) && (mysqli_num_rows($result_check_pencegahan) > 0)) {
-    $sql_pembetulan = "UPDATE pembetulan SET description = '$pembetulan' WHERE User_ID = $user_id";
-    $sql_pencegahan = "UPDATE pencegahan SET description = '$pencegahan' WHERE User_ID = $user_id";
+    $sql_pembetulan = "UPDATE pembetulan SET description = '$pembetulan', User_ID = $user_id WHERE Aduan_ID = $Aduan_ID";
+    $sql_pencegahan = "UPDATE pencegahan SET description = '$pencegahan', User_ID = $user_id WHERE Aduan_ID = $Aduan_ID";
 
 
     if ($conn->query($sql_pembetulan) === TRUE && $conn->query($sql_pencegahan) === TRUE && $conn->query($sql_aduan) === TRUE) {
