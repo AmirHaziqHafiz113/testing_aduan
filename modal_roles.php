@@ -21,7 +21,7 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add <?= $type == 'role' ? 'Roles' :( $type == 'permission' ? 'Permissions' : ($type == 'user' ? 'User Role' : ($type == 'role_perm' ? 'Roles/Permission' :'Blank'))) ?></h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add <?= $type == 'role' ? 'Roles' :( $type == 'permission' ? 'Permissions' : ($type == 'user' ? 'User Role' : ($type == 'role_perm' ? 'Roles/Permission' : ($type == 'category' ? 'Category' :'Blank')))) ?></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -103,7 +103,7 @@
                         <input type='text' class='form-control' id='user_name' name="user_name" placeholder="Please Input User Name" required>
                     </div>
                     <div class='form-group'>
-                        <label for='email' class='col-form-label'>Description:</label>
+                        <label for='email' class='col-form-label'>Email:</label>
                         <input type='email' class='form-control' id='email' name="email" placeholder="Please Input Email" required>
                     </div>
                     <div class='form-group'>
@@ -113,6 +113,12 @@
                     <div class='form-group'>
                         <label for='department' class='col-form-label'>Department:</label>
                         <input type='text' class='form-control' id='department' name="department" placeholder="Please Input Department" required>
+                    </div>
+                    <input type="hidden" name="add_by" value="<?= $_SESSION['sessionname'] ?>">
+                <?php } else if ($type == 'category') { ?>
+                    <div class='form-group'>
+                        <label for='description' class='col-form-label'>Description:</label>
+                        <input type='description' class='form-control' id='description' name="description" placeholder="Please Input Description" required>
                     </div>
                     <input type="hidden" name="add_by" value="<?= $_SESSION['sessionname'] ?>">
                 <?php }?>

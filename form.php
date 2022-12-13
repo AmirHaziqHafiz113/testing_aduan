@@ -22,6 +22,9 @@ if ($_GET['id']) {
     $q_pencegahan = "SELECT * FROM pencegahan WHERE Aduan_ID = $id";
     $result_pencegahan = mysqli_query($connection, $q_pencegahan);
     $row_pencegahan = mysqli_fetch_array($result_pencegahan);
+
+    $query_category = "SELECT * FROM category";
+    $result_category = mysqli_query($connection, $query_category);
 }
 
 ?>
@@ -146,6 +149,24 @@ if ($_GET['id']) {
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php if (hasPermission('can_category') == 'TRUE' || hasPermission('can_category') == 'TRUE') { ?>
+                                        <label>Category </label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <select name="category" class="form-control" id="role_id">
+                                                        <?php
+                                                            if ($result_category) {
+                                                                while ($row_category = mysqli_fetch_assoc($result_category)) { ?>
+                                                                    <option value="<?= $row_category['Category_ID'] ?>" <?= $row_category['Category_ID'] == $row['Category_ID'] ? 'selected' : '' ?>><?= $row_category['Description'] ?></option>
+                                                                <?php }
+                                                            }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php } ?>
                                         <h4 class="card-title">Section B</h4>
                                         <label>Pencegahan </label>
                                         <div class="row">

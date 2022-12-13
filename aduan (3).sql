@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2022 at 10:07 PM
+-- Generation Time: Dec 13, 2022 at 06:25 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -49,7 +49,9 @@ CREATE TABLE `aduan_tb` (
 --
 
 INSERT INTO `aduan_tb` (`Aduan_ID`, `Category_ID`, `Status_Desc`, `Nama_Pengadu`, `No_Tel`, `Email`, `langkah`, `Aduan_Info`, `complaint_cond`, `Timestamp_New`, `Timestamp_Pending`, `Timestamp_In_Progress`, `Timestamp_Closed`, `Timestamp_Amend`) VALUES
-(70001, 30001, 'Pending', 'Amir Haziq', 1110894397, 'amirhaziqhafiz113@gmail.com', '', 'Testing', 'Amend', '2022-12-05 21:07:18', '2022-10-05 05:04:31', '2022-12-05 21:59:56', '2022-12-05 22:06:51', '2022-12-05 22:07:18');
+(70001, 30001, 'In Progress', 'Amir Haziq', 1110894397, 'amirhaziqhafiz113@gmail.com', '', 'Testing', 'Amend', '2022-12-07 10:25:48', '2022-10-05 05:04:31', '2022-12-07 11:25:48', '2022-12-05 22:06:51', '2022-12-05 22:07:18'),
+(70007, 30001, 'Pending', 'faizul', 178016870, 'faizul.ramir@gmail.com', '', 'as', NULL, '2022-12-13 05:23:14', NULL, '2022-12-13 06:23:14', NULL, NULL),
+(70008, 30003, 'Pending', 'faizul', 178016870, 'apejol@gmail.com', '', 'asdsadasdsad', NULL, '2022-12-13 05:22:46', NULL, '2022-12-13 06:22:46', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`Category_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(30001, 'Antivirus and hardware', 'Amir', '2022-10-03 07:58:29');
+(30001, 'Antivirus and hardware', 'Amir', '2022-10-03 07:58:29'),
+(30003, 'Test', 'Amir Haziq Hafiz Muhammad', '2022-12-13 04:54:39');
 
 -- --------------------------------------------------------
 
@@ -91,7 +94,9 @@ CREATE TABLE `pembetulan` (
 --
 
 INSERT INTO `pembetulan` (`Correction_ID`, `Aduan_ID`, `User_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(50001, 70001, 10001, 'Prepared kasperksy protection', 'Amir', '2022-10-06 02:42:50');
+(50001, 70001, 10001, 'Prepared kasperksy protection', 'Amir', '2022-10-06 02:42:50'),
+(50006, 70007, 10003, 'asdasdasdds', 'faizul', '2022-12-13 05:20:03'),
+(50007, 70008, 10003, 'asdasdasdds', 'faizul', '2022-12-13 05:05:58');
 
 -- --------------------------------------------------------
 
@@ -113,7 +118,9 @@ CREATE TABLE `pencegahan` (
 --
 
 INSERT INTO `pencegahan` (`Prevention_ID`, `Aduan_ID`, `User_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(60001, 70001, 10001, 'Update PC to newer antivirus', 'Amir', '2022-10-06 02:43:02');
+(60001, 70001, 10001, 'Update PC to newer antivirus', 'Amir', '2022-10-06 02:43:02'),
+(60006, 70007, 10003, 'asdasd', 'faizul', '2022-12-13 05:20:03'),
+(60007, 70008, 10003, 'asdasd', 'faizul', '2022-12-13 05:05:58');
 
 -- --------------------------------------------------------
 
@@ -135,7 +142,8 @@ INSERT INTO `permissions` (`id`, `name`, `description`) VALUES
 (5, 'Verify', 'verify reports'),
 (6, 'Edit', 'edit reports'),
 (7, 'Delete', 'delete reports'),
-(9, 'Complaint', 'complaint');
+(9, 'Complaint', 'complaint'),
+(10, 'can_category', 'Category');
 
 -- --------------------------------------------------------
 
@@ -158,7 +166,9 @@ INSERT INTO `permission_role` (`id`, `role_id`, `permission_id`) VALUES
 (9, 4, 6),
 (10, 4, 7),
 (12, 4, 9),
-(13, 5, 5);
+(13, 5, 5),
+(14, 4, 10),
+(15, 6, 10);
 
 -- --------------------------------------------------------
 
@@ -178,7 +188,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 (4, 'SuperAdmin', 'Super Admin'),
-(5, 'HeadDepartment', 'Head Department');
+(5, 'HeadDepartment', 'Head Department'),
+(6, 'Admin', 'Administrator');
 
 -- --------------------------------------------------------
 
@@ -225,7 +236,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `U_Name`, `email`, `password`, `U_Dept`, `Timestamp`, `Add_By`) VALUES
 (10001, 'Amir Haziq Hafiz Muhammad', 'finejake113@gmail.com', '$2y$10$dmzr0uFyN4ctJBKFhGcb1OA9HalrtOMCnVWll8sBXhcFBNdmCDwGO', 'TMK', '2022-12-05 18:00:51', 'Amir Haziq Hafiz Muhammad'),
-(10002, 'Head Department', 'headdeparment@gmail.com', '$2y$10$dmzr0uFyN4ctJBKFhGcb1OA9HalrtOMCnVWll8sBXhcFBNdmCDwGO', 'DDT', '2022-12-05 17:57:26', 'Amir Haziq Hafiz Muhammad');
+(10002, 'Head Department', 'headdeparment@gmail.com', '$2y$10$dmzr0uFyN4ctJBKFhGcb1OA9HalrtOMCnVWll8sBXhcFBNdmCDwGO', 'DDT', '2022-12-05 17:57:26', 'Amir Haziq Hafiz Muhammad'),
+(10003, 'Admin', 'admin@gmail.com', '$2y$10$ri3B4wOGQrOVlFocsy6Gs.cjLNIEELBjcvEafb7CzixGVyh2WMRn6', 'DDT', '2022-12-07 10:20:02', 'Amir Haziq Hafiz Muhammad');
 
 -- --------------------------------------------------------
 
@@ -245,7 +257,8 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
 (3, 10001, 4),
-(4, 10002, 5);
+(4, 10002, 5),
+(5, 10003, 6);
 
 --
 -- Indexes for dumped tables
@@ -255,8 +268,7 @@ INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
 -- Indexes for table `aduan_tb`
 --
 ALTER TABLE `aduan_tb`
-  ADD PRIMARY KEY (`Aduan_ID`),
-  ADD KEY `Category_ID` (`Category_ID`);
+  ADD PRIMARY KEY (`Aduan_ID`);
 
 --
 -- Indexes for table `category`
@@ -329,43 +341,43 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `aduan_tb`
 --
 ALTER TABLE `aduan_tb`
-  MODIFY `Aduan_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70003;
+  MODIFY `Aduan_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70009;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30002;
+  MODIFY `Category_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30004;
 
 --
 -- AUTO_INCREMENT for table `pembetulan`
 --
 ALTER TABLE `pembetulan`
-  MODIFY `Correction_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50002;
+  MODIFY `Correction_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50008;
 
 --
 -- AUTO_INCREMENT for table `pencegahan`
 --
 ALTER TABLE `pencegahan`
-  MODIFY `Prevention_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60002;
+  MODIFY `Prevention_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60008;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `permission_role`
 --
 ALTER TABLE `permission_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -377,23 +389,17 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10003;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10004;
 
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `aduan_tb`
---
-ALTER TABLE `aduan_tb`
-  ADD CONSTRAINT `aduan_tb_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pembetulan`

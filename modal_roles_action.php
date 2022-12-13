@@ -67,5 +67,17 @@ if ($type == 'role') {
     } else {
         echo "Error inserting record: " . $conn->error;
     }
+} else if ($type == 'category') {
+    $desc = $_POST['description'];
+    $add_by = $_POST['add_by'];
+
+    $insert_desc = "INSERT INTO category (Description, Add_By) VALUES('$desc', '$add_by')";
+    $run_insert_desc = mysqli_query($conn, $insert_desc);
+
+    if ($run_insert_desc === true) {
+        echo "<script> alert('Record inserted successfully'); window.open('category.php','_self');</script>";
+    } else {
+        echo "Error inserting record: " . $conn->error;
+    }
 }
 ?>
