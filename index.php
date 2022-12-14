@@ -43,7 +43,7 @@ $result = mysqli_query($connect, $query);
                 </a>
                 <nav class="pr-menu">
                     <ul>
-                        <li><a href='login.php'>Admin Login</a></li>
+                        <li><a href='login.php'>Sign In</a></li>
                     </ul>
                 </nav>
             </header>
@@ -77,7 +77,7 @@ $result = mysqli_query($connect, $query);
                                                 </div>
                                                 <div class="form-group">
                                                 <label for="No_Tel" class="col-form-label">Nombor Telefon:</label>
-                                                    <input type="tel" class="form-control" name="No_Tel" pattern="\+?6?(?:01[0-46-9]\d{7,8}|0\d{8})" placeholder='Isi nombor anda seperti: 0123456789' required>
+                                                    <input type="tel" class="form-control" name="No_Tel" pattern="[+60]?[0-9-]+" placeholder='Isi nombor anda seperti: 0123456789' required>
                                                 </div>
                                                 <div class="form-group">
                                                 <label for="Email" class="col-form-label">Email:</label>

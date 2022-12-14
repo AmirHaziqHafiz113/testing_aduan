@@ -33,13 +33,12 @@ if ($btn_val == 'Close') {
     $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_Amend = '$current_timestamp', Status_Desc = 'Pending', complaint_cond = 'Amend', Category_ID = '$category' WHERE Aduan_ID = $Aduan_ID";
 } else if ($btn_val == 'submit') {
     if (hasRole('HeadDepartment') == 'TRUE') {
-        $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'In Progress', Category_ID = '$category' WHERE Aduan_ID = $Aduan_ID";
+        $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'In Progress' WHERE Aduan_ID = $Aduan_ID";
     } else if (hasRole('Admin') == 'TRUE') {
         $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'Pending', Category_ID = '$category' WHERE Aduan_ID = $Aduan_ID";
     } else {
         $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Category_ID = '$category' WHERE Aduan_ID = $Aduan_ID";
     }
-   
 }
 
 
