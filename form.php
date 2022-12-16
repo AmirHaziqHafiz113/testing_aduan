@@ -131,6 +131,16 @@ if ($_GET['id']) {
                                                 </div>
                                             </div>
                                         </div>
+                                        <label>Maklumat Aduan</label>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="Aduan_Info"
+                                                        placeholder="" value="<?php echo $row['Aduan_Info'] ?>"
+                                                        readonly>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <label>No Telefon</label>
                                         <div class="row">
                                             <div class="col-md-4">

@@ -21,16 +21,15 @@ if (isset($_POST['submit-btn'])) {
   $response = file_get_contents($url);
   $response = json_decode($response);
   if ($response->success == true) {
-    echo '<script>alert("Google reCAPTACHA verified")</script>';
+    $insert = "INSERT INTO aduan_tb (Nama_Pengadu,Aduan_Info,No_Tel,Email,Status_Desc)
+    VALUES(?,?,?,?,?)";
+    $stmt = mysqli_prepare($conn, $insert);
   } else {
-    echo '<script>alert("Error in Google reCAPTACHA")</script>';
+    echo "<script>
+      alert('Google reCAPTCHA failed. Please try again.');
+      window.open('index.php','_self');</script>";
   }
   $sent = 'New';
-
-  // Create a prepared statement with placeholders for the values
-  $insert = "INSERT INTO aduan_tb (Nama_Pengadu,Aduan_Info,No_Tel,Email,Status_Desc)
-    VALUES(?,?,?,?,?)";
-  $stmt = mysqli_prepare($conn, $insert);
 
   // Check if the prepared statement was created successfully
   if ($stmt === false) {
@@ -40,7 +39,7 @@ if (isset($_POST['submit-btn'])) {
   }
 
   // Bind the values to the placeholders in the prepared statement
-  mysqli_stmt_bind_param($stmt, "sssss", $Nama_Pengadu, $Aduan_Info, $No_Tel, $Email, $sent);
+  mysqli_stmt_bind_param($stmt, "ssiss", $Nama_Pengadu, $Aduan_Info, $No_Tel, $Email, $sent);
 
   // Execute the prepared statement
   mysqli_stmt_execute($stmt);

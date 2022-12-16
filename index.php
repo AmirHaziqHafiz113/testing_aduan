@@ -77,7 +77,7 @@ $result = mysqli_query($connect, $query);
                                                 </div>
                                                 <div class="form-group">
                                                 <label for="No_Tel" class="col-form-label">Nombor Telefon:</label>
-                                                    <input type="tel" class="form-control" name="No_Tel" pattern="[+60]?[0-9-]+" placeholder='Isi nombor anda seperti: 0123456789' required>
+                                                    <input type="tel" class="form-control" name="No_Tel" pattern="[+60]?[0-9-]+" placeholder='Isi nombor anda seperti: 60123456789' required>
                                                 </div>
                                                 <div class="form-group">
                                                 <label for="Email" class="col-form-label">Email:</label>
