@@ -47,9 +47,9 @@ $result = mysqli_query($connect, $query);
                     </ul>
                 </nav>
             </header>
-
             <section class="pr-main pr-home-content container">
-                <h1 class="pr-fadein">Bernama Aduan</h1>
+            <img src="assets/images/logo.png" alt="homepage" class="dark-logo" />
+                <h1 class="pr-fadein">Aduan</h1>
                 <p>Sila tekan butang di bawah untuk mengisi aduan anda ....</p>
                 <br>
                 <div class="page-content page-container" id="page-content">

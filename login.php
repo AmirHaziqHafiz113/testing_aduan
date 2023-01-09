@@ -34,6 +34,7 @@
  <div class="loader-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
 	<div class="card card-authentication1 mx-auto my-5">
 		<div class="card-body">
+    <img src="assets/images/bernama.png" width="150" height="150" style="display: block; margin: auto;"/>
 		 <div class="card-content p-2">
 		  <div class="card-title text-uppercase text-center py-3">Log In</div>
 		    <form action='config.php'  method='post' autocomplete='off'>
