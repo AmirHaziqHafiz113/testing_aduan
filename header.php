@@ -115,7 +115,7 @@
                                     <a href="user_list.php" class="sidebar-link"><span class="hide-menu">User List</span></a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="category.php" class="sidebar-link"><span class="hide-menu">Category List</span></a>
+                                    <a href="service.php" class="sidebar-link"><span class="hide-menu">Service List</span></a>
                                 </li>
                             </ul>
                             <?php } ?>

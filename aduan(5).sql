@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2022 at 08:27 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Jan 14, 2023 at 12:21 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `aduan_tb` (
   `Timestamp_In_Progress` datetime DEFAULT NULL,
   `Timestamp_Closed` datetime DEFAULT NULL,
   `Timestamp_Amend` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `aduan_tb`
@@ -57,27 +57,6 @@ INSERT INTO `aduan_tb` (`Aduan_ID`, `Category_ID`, `Status_Desc`, `Nama_Pengadu`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
---
-
-CREATE TABLE `category` (
-  `Category_ID` int(50) NOT NULL,
-  `Description` varchar(1000) NOT NULL,
-  `Add_By` varchar(100) NOT NULL,
-  `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`Category_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
-(30001, 'Antivirus and hardware', 'Amir', '2022-10-03 07:58:29'),
-(30003, 'Test', 'Amir Haziq Hafiz Muhammad', '2022-12-13 04:54:39');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pembetulan`
 --
 
@@ -88,7 +67,7 @@ CREATE TABLE `pembetulan` (
   `Description` varchar(1000) NOT NULL,
   `Add_By` varchar(100) NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pembetulan`
@@ -113,7 +92,7 @@ CREATE TABLE `pencegahan` (
   `Description` varchar(1000) NOT NULL,
   `Add_By` varchar(100) NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pencegahan`
@@ -135,7 +114,7 @@ CREATE TABLE `permissions` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -146,7 +125,7 @@ INSERT INTO `permissions` (`id`, `name`, `description`) VALUES
 (6, 'Edit', 'edit reports'),
 (7, 'Delete', 'delete reports'),
 (9, 'Complaint', 'complaint'),
-(10, 'can_category', 'Category');
+(10, 'can_service', 'Category');
 
 -- --------------------------------------------------------
 
@@ -158,7 +137,7 @@ CREATE TABLE `permission_role` (
   `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `permission_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `permission_role`
@@ -183,7 +162,7 @@ CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `roles`
@@ -192,7 +171,35 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 (4, 'SuperAdmin', 'Super Admin'),
 (5, 'HeadDepartment', 'Head Department'),
-(6, 'Admin', 'Administrator');
+(6, 'Admin', 'Administrator'),
+(7, 'Admin - MREM', 'MREM Department');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service`
+--
+
+CREATE TABLE `service` (
+  `Service_ID` int(50) NOT NULL,
+  `Description` varchar(1000) NOT NULL,
+  `Add_By` varchar(100) NOT NULL,
+  `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `service`
+--
+
+INSERT INTO `service` (`Service_ID`, `Description`, `Add_By`, `Timestamp`) VALUES
+(30004, 'General', 'amir haziq hafiz muhammad', '2023-01-13 23:11:08'),
+(30005, 'Digital Service', 'amir haziq hafiz muhammad', '2023-01-13 23:11:15'),
+(30006, 'Radio Service', 'amir haziq hafiz muhammad', '2023-01-13 23:11:31'),
+(30007, 'TV Service', 'amir haziq hafiz muhammad', '2023-01-13 23:11:48'),
+(30008, 'PR/MREM Service', 'amir haziq hafiz muhammad', '2023-01-13 23:12:02'),
+(30009, 'Subscription', 'amir haziq hafiz muhammad', '2023-01-13 23:12:12'),
+(30010, 'Editorial Coverage', 'amir haziq hafiz muhammad', '2023-01-13 23:12:22'),
+(30011, 'Official Website Enquiry', 'amir haziq hafiz muhammad', '2023-01-13 23:12:37');
 
 -- --------------------------------------------------------
 
@@ -205,7 +212,7 @@ CREATE TABLE `status` (
   `Description` varchar(1000) NOT NULL,
   `Add_By` varchar(100) NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `status`
@@ -231,7 +238,7 @@ CREATE TABLE `users` (
   `U_Dept` varchar(100) NOT NULL,
   `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `Add_By` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -252,7 +259,7 @@ CREATE TABLE `user_role` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_role`
@@ -272,12 +279,6 @@ INSERT INTO `user_role` (`id`, `user_id`, `role_id`) VALUES
 --
 ALTER TABLE `aduan_tb`
   ADD PRIMARY KEY (`Aduan_ID`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`Category_ID`);
 
 --
 -- Indexes for table `pembetulan`
@@ -316,6 +317,12 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `service`
+--
+ALTER TABLE `service`
+  ADD PRIMARY KEY (`Service_ID`);
+
+--
 -- Indexes for table `status`
 --
 ALTER TABLE `status`
@@ -346,12 +353,6 @@ ALTER TABLE `aduan_tb`
   MODIFY `Aduan_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70010;
 
 --
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `Category_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30004;
-
---
 -- AUTO_INCREMENT for table `pembetulan`
 --
 ALTER TABLE `pembetulan`
@@ -379,7 +380,13 @@ ALTER TABLE `permission_role`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `service`
+--
+ALTER TABLE `service`
+  MODIFY `Service_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30012;
 
 --
 -- AUTO_INCREMENT for table `status`

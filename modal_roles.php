@@ -21,7 +21,7 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add <?= $type == 'role' ? 'Roles' :( $type == 'permission' ? 'Permissions' : ($type == 'user' ? 'User Role' : ($type == 'role_perm' ? 'Roles/Permission' : ($type == 'category' ? 'Category' :'Blank')))) ?></h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add <?= $type == 'role' ? 'Roles' :( $type == 'permission' ? 'Permissions' : ($type == 'user' ? 'User Role' : ($type == 'role_perm' ? 'Roles/Permission' : ($type == 'service' ? 'Service' :'Blank')))) ?></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -115,7 +115,7 @@
                         <input type='text' class='form-control' id='department' name="department" placeholder="Please Input Department" required>
                     </div>
                     <input type="hidden" name="add_by" value="<?= $_SESSION['sessionname'] ?>">
-                <?php } else if ($type == 'category') { ?>
+                <?php } else if ($type == 'service') { ?>
                     <div class='form-group'>
                         <label for='description' class='col-form-label'>Description:</label>
                         <input type='description' class='form-control' id='description' name="description" placeholder="Please Input Description" required>

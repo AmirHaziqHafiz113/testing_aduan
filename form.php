@@ -23,8 +23,8 @@ if ($_GET['id']) {
     $result_pencegahan = mysqli_query($connection, $q_pencegahan);
     $row_pencegahan = mysqli_fetch_array($result_pencegahan);
 
-    $query_category = "SELECT * FROM category";
-    $result_category = mysqli_query($connection, $query_category);
+    $query_service = "SELECT * FROM service";
+    $result_service = mysqli_query($connection, $query_service);
 }
 
 ?>
@@ -159,16 +159,16 @@ if ($_GET['id']) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php if (hasPermission('can_category') == 'TRUE' || hasPermission('can_category') == 'TRUE') { ?>
-                                        <label>Category </label>
+                                        <?php if (hasPermission('can_service') == 'TRUE' || hasPermission('can_service') == 'TRUE') { ?>
+                                        <label>Service </label>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <select name="category" class="form-control" id="role_id">
+                                                    <select name="service" class="form-control" id="role_id">
                                                         <?php
-                                                            if ($result_category) {
-                                                                while ($row_category = mysqli_fetch_assoc($result_category)) { ?>
-                                                                    <option value="<?= $row_category['Category_ID'] ?>" <?= $row_category['Category_ID'] == $row['Category_ID'] ? 'selected' : '' ?>><?= $row_category['Description'] ?></option>
+                                                            if ($result_service) {
+                                                                while ($row_service = mysqli_fetch_assoc($result_service)) { ?>
+                                                                    <option value="<?= $row_service['Service_ID'] ?>" <?= $row_service['Service_ID'] == $row['Service_ID'] ? 'selected' : '' ?>><?= $row_service['Description'] ?></option>
                                                                 <?php }
                                                             }
                                                         ?>
