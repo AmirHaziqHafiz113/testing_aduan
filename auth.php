@@ -3,7 +3,12 @@
     if(!isset($_SESSION)) 
     { 
         session_start(); 
-    } 
+    }
+    if (!isset($_SESSION['id'])) {
+        echo "<script>alert('No Permission');</script>";
+        // session_destroy();
+        echo "<script>window.open('login.php','_self')</script>";
+    }
 
     $id = $_SESSION['id'];
     $q_check_user = "SELECT * FROM users WHERE id = $id";
