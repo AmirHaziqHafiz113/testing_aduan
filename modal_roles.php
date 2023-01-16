@@ -16,12 +16,15 @@
 
     $query_user = "SELECT * FROM users ORDER BY U_Name DESC";
     $result_user = mysqli_query($connection, $query_user);
+
+    $query_service = "SELECT * FROM service";
+    $result_service = mysqli_query($connection, $query_service);
 ?>
        
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add <?= $type == 'role' ? 'Roles' :( $type == 'permission' ? 'Permissions' : ($type == 'user' ? 'User Role' : ($type == 'role_perm' ? 'Roles/Permission' : ($type == 'service' ? 'Service' :'Blank')))) ?></h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add <?= $type == 'role' ? 'Roles' :( $type == 'permission' ? 'Permissions' : ($type == 'user' ? 'User Role' : ($type == 'role_perm' ? 'Roles/Permission' : ($type == 'service' ? 'Service' : ($type == 'user_list' ? 'User' : ($type == 'service_assign' ? 'Service to Role' : 'Blank')))))) ?></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -114,6 +117,18 @@
                         <label for='department' class='col-form-label'>Department:</label>
                         <input type='text' class='form-control' id='department' name="department" placeholder="Please Input Department" required>
                     </div>
+                    <div class='form-group'>
+                        <label for='permission-name' class='col-form-label'>Role:</label>
+                        <select name="role_id" class="form-control" id="role_id">
+                            <?php
+                                if ($result_role) {
+                                    while ($row = mysqli_fetch_assoc($result_role)) { ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                    <?php }
+                                }
+                            ?>
+                        </select>
+                    </div>
                     <input type="hidden" name="add_by" value="<?= $_SESSION['sessionname'] ?>">
                 <?php } else if ($type == 'service') { ?>
                     <div class='form-group'>
@@ -121,6 +136,28 @@
                         <input type='description' class='form-control' id='description' name="description" placeholder="Please Input Description" required>
                     </div>
                     <input type="hidden" name="add_by" value="<?= $_SESSION['sessionname'] ?>">
+                <?php } else if ($type == 'service_assign') { ?>
+                    <label for='permission-name' class='col-form-label'>Role:</label>
+                    <select name="role_id" class="form-control" id="role_id">
+                        <?php
+                            if ($result_role) {
+                                while ($row = mysqli_fetch_assoc($result_role)) { ?>
+                                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                                <?php }
+                            }
+                        ?>
+                    </select>
+                    <label for='service' class='col-form-label'>Service:</label>
+                    <select name="service_id" class="form-control" id="service_id">
+                        <?php
+                            if ($result_service) {
+                                while ($row = mysqli_fetch_assoc($result_service)) { ?>
+                                    <option value="<?= $row['Service_ID'] ?>"><?= $row['Description'] ?></option>
+                                <?php }
+                            }
+                        ?>
+                    </select>
+                    <br>
                 <?php }?>
 
                 <div class='form-group'>

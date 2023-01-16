@@ -6,6 +6,10 @@ $connect = mysqli_connect("localhost", "root", "", "aduan");
 $query = "SELECT * FROM aduan_tb ORDER BY Aduan_ID DESC";
 $result = mysqli_query($connect, $query);
 
+$query_service = "SELECT * FROM service";
+$result_service = mysqli_query($connect, $query_service);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,99 +58,55 @@ $result = mysqli_query($connect, $query);
             <section class="pr-main pr-home-content container">
                 <img src="assets/images/logo.png" alt="homepage" class="dark-logo" />
                 <h1 class="pr-fadein">Aduan</h1>
-                <p>Sila tekan butang di bawah untuk mengisi aduan anda ....</p>
                 <br>
                 <div class="page-content page-container" id="page-content">
-                    <div class="padding">
-                        <div class="row container d-flex justify-content-center">
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#exampleModal-4" data-whatever="@fat">Isi Aduan</button>
-                            <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog"
-                                aria-labelledby="ModalLabel" aria-hidden="true" style="display: none;">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="ModalLabel">Butir Aduan</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body"><grammarly-extension
-                                                style="position: absolute; top: 0px; left: 0px; pointer-events: none;">
-                                                <div data-grammarly-part="highlights"
-                                                    style="position: absolute; top: 0px; left: 0px;">
-                                                    <div
-                                                        style="box-sizing: content-box; top: 1px; left: 1px; width: 0px; height: 0px; position: relative; pointer-events: none; overflow: hidden; border: 0px; border-radius: 0px; padding: 0px; margin: 0px;">
-                                                        <div style="position: absolute; top: 0px; left: 0px;">
-                                                            <div style="height: 815px; width: 1440px;"></div>
-                                                            <div
-                                                                style="position: absolute; top: 0px; left: 0px; height: 815px; width: 1440px;">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div data-grammarly-part="button"
-                                                    style="position: absolute; top: 0px; left: 0px;">
-                                                    <div
-                                                        style="box-sizing: content-box; top: 1px; left: 1px; width: 0px; height: 0px; position: relative; pointer-events: none; overflow: hidden; border: 0px; border-radius: 0px; padding: 0px; margin: 0px;">
-                                                        <div
-                                                            style="position: absolute; transform: translate(-100%, -100%); top: -14px; left: -22px; pointer-events: all;">
-                                                            <div style="display: flex; flex-direction: row;">
-                                                                <div class="_3-ITD">
-                                                                    <div class="_5WizN aN9_b _1QzSN">
-                                                                        <div class="_3YmQx">
-                                                                            <div title="Protected by Grammarly"
-                                                                                class="_3QdKe">&nbsp;</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </grammarly-extension>
-                                            <form action='insert.php' method='post' enctype='multipart/form-data'>
-                                                <div class="form-group">
-                                                    <label for="Nama_Pengadu" class="col-form-label">Nama
-                                                        Pengadu:</label>
-                                                    <input type="text" class="form-control" name="Nama_Pengadu"
-                                                        placeholder='Isi nama anda' required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Aduan_Info" class="col-form-label">Aduan:</label>
-                                                    <textarea class="form-control" id="form-aduan" name="Aduan_Info"
-                                                        placeholder='Isi aduan anda' required></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="No_Tel" class="col-form-label">Nombor Telefon:</label>
-                                                    <input type="tel" class="form-control" name="No_Tel"
-                                                        pattern="[+60]?[0-9-]+"
-                                                        placeholder='Isi nombor anda seperti: 60123456789' required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="Email" class="col-form-label">Email:</label>
-                                                    <input type="email" class="form-control" name="Email"
-                                                        placeholder='Isi email anda' required>
-                                                </div>
-                                                <div class="g-recaptcha" id="my_captcha_form"
-                                                    data-sitekey="6Lc7ImcjAAAAAKtZ__d2mnC2SR8k9WeFmeQTQ-IU" required>
-                                                </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" value='submit' class="btn btn-success"
-                                                name="submit-btn">Send message</button>
-                                            <button type="button" class="btn btn-light"
-                                                data-dismiss="modal">Close</button>
-                                        </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                    <form action='insert.php' method='post' enctype='multipart/form-data'>
+                        <div class="form-group">
+                            <label for="Nama_Pengadu" class="col-form-label">Nama
+                                Pengadu:</label>
+                            <input type="text" class="form-control" name="Nama_Pengadu"
+                                placeholder='Isi nama anda' required>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="Aduan_Info" class="col-form-label">Aduan:</label>
+                            <textarea class="form-control" id="form-aduan" name="Aduan_Info"
+                                placeholder='Isi aduan anda' required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="No_Tel" class="col-form-label">Nombor Telefon:</label>
+                            <input type="tel" class="form-control" name="No_Tel"
+                                pattern="[+60]?[0-9-]+"
+                                placeholder='Isi nombor anda seperti: 60123456789' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" name="Email"
+                                placeholder='Isi email anda' required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Service" class="col-form-label">Service:</label>
+                            <select name="service_id" class="form-control" id="service_id">
+                            <?php
+                                if ($result_service) {
+                                    while ($row = mysqli_fetch_assoc($result_service)) { ?>
+                                        <option value="<?= $row['Service_ID'] ?>"><?= $row['Description'] ?></option>
+                                    <?php }
+                                }
+                            ?>
+                        </select>
+                        </div>
+                        
+                        <div class="g-recaptcha" id="my_captcha_form"
+                            data-sitekey="6Lc7ImcjAAAAAKtZ__d2mnC2SR8k9WeFmeQTQ-IU" required>
+                        </div>
+                        <button type="submit" value='submit' class="btn btn-success"
+                            name="submit-btn">Send message</button>
+                        <button type="button" class="btn btn-light"
+                            data-dismiss="modal">Close</button>
+                    </form>
                 </div>
-
             </section>
+            
             <div class="pr-arrow-wrapper">
                 <div class="pr-arrow"></div>
             </div>

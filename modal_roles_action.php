@@ -58,12 +58,19 @@ if ($type == 'role') {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $department = $_POST['department'];
     $add_by = $_POST['add_by'];
-
+    $role_id = $_POST['role_id'];
+    
     $insert_users = "INSERT INTO users (U_Name, email, password, U_Dept, Add_By) VALUES('$user_name', '$email', '$password', '$department', '$add_by')";
     $run_insert_users = mysqli_query($conn, $insert_users);
-
+    
     if ($run_insert_users === true) {
-        echo "<script> alert('Record inserted successfully'); window.open('user_list.php','_self');</script>";
+        $insert_user_role = "INSERT INTO user_role (user_id, role_id) VALUES('$conn->insert_id','$role_id')";
+        $run_insert_user_role = mysqli_query($conn, $insert_user_role);
+        if ($run_insert_user_role === true) {
+            echo "<script> alert('Record inserted successfully'); window.open('user_list.php','_self');</script>";
+        } else {
+            echo "Error inserting record: " . $conn->error;
+        }
     } else {
         echo "Error inserting record: " . $conn->error;
     }
@@ -76,6 +83,18 @@ if ($type == 'role') {
 
     if ($run_insert_desc === true) {
         echo "<script> alert('Record inserted successfully'); window.open('service.php','_self');</script>";
+    } else {
+        echo "Error inserting record: " . $conn->error;
+    }
+} else if ($type == 'service_assign') {
+    $role_id = $_POST['role_id'];
+    $service_id = $_POST['service_id'];
+
+    $insert_role_service = "INSERT INTO service_role (Service_ID, role_id) VALUES('$service_id', '$role_id')";
+    $run_insert_role_service = mysqli_query($conn, $insert_role_service);
+
+    if ($run_insert_role_service === true) {
+        echo "<script> alert('Record inserted successfully'); window.open('service_role.php','_self');</script>";
     } else {
         echo "Error inserting record: " . $conn->error;
     }

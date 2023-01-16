@@ -3,15 +3,16 @@
 <?php
 include_once('middleware.php');
 $connection = new mysqli("localhost", "root", "", "aduan");
-$query = "SELECT * 
-FROM aduan_tb 
-ORDER BY Aduan_ID DESC";
+// $query = "SELECT * 
+// FROM aduan_tb 
+// ORDER BY Timestamp_New DESC";
+// $result = mysqli_query($connection, $query);
+
+$query = "SELECT aduan_tb.Aduan_ID, aduan_tb.Service_ID, aduan_tb.Nama_Pengadu, aduan_tb.Email, aduan_tb.No_Tel, aduan_tb.Status_Desc, aduan_tb.Aduan_Info, aduan_tb.Timestamp_New, service.Service_ID, service.Description
+FROM aduan_tb INNER JOIN
+service ON service.Service_ID = aduan_tb.Service_ID";
 $result = mysqli_query($connection, $query);
 
-
-if (!isset($_SESSION['sessionname'])) {
-    echo "<script>window.open('login.php','_self')</script>";
-}
 ?>
 
 <head>
@@ -92,6 +93,7 @@ if (!isset($_SESSION['sessionname'])) {
                                             <th>No. Telefon Pengadu</th>
                                             <th>Info aduan</th>
                                             <th>Status</th>
+                                            <th>Timestamp</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -116,6 +118,7 @@ if (!isset($_SESSION['sessionname'])) {
                                             echo "<td>" . $row['No_Tel'] . "</td>";
                                             echo "<td>" . $row['Aduan_Info'] . "</td>";
                                             echo "<td>" . $row['Status_Desc'] . "</td>";
+                                            echo "<td>" . $row['Timestamp_New'] . "</td>";
                                             echo "<td><center>
                                                 <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] . ");' style='color:white'>View</a>&nbsp;&nbsp;";
                                             if (hasPermission('Delete') === 'TRUE') {
@@ -175,43 +178,11 @@ if (!isset($_SESSION['sessionname'])) {
             document.title = "Aduan - Form";
             // DataTable initialisation
             $("#example").DataTable({
-                dom: '<"dt-buttons"Bf><"clear">lirtp',
+                order: [[5, 'desc']],
                 paging: true,
                 autoWidth: true,
-                buttons: [
-                    "colvis",
-                    "copyHtml5",
-                    "csvHtml5",
-                    "excelHtml5",
-                    "pdfHtml5",
-                    "print"
-                ],
                 initComplete: function (settings, json) {
-                    $(".dt-buttons .btn-group").append(
-                        '<a id="cv" href="#">CARD VIEW</a>'
-                    );
-
-                    $("#cv").on("click", function () {
-                        if ($("#example").hasClass("card")) {
-                            $(".colHeader").remove();
-                        } else {
-                            var labels = [];
-                            $("#example thead th").each(function () {
-                                labels.push($(this).text());
-                            });
-                            $("#example tbody tr").each(function () {
-                                $(this)
-                                    .find("td")
-                                    .each(function (column) {
-                                        $("<span class='colHeader'>" + labels[column] + ":</span>").prependTo(
-                                            $(this)
-                                        );
-                                    });
-                            });
-                        }
-                        $("#example").toggleClass("card");
-
-                    });
+                    
                 }
             });
         });

@@ -2,16 +2,17 @@
 <html dir="ltr" lang="en">
 <?php
 $connection = new mysqli("localhost", "root", "", "aduan");
-$query = "SELECT * FROM users";
-
+$query = "SELECT service_role.Service_ID, service_role.role_id, roles.name, service.Description FROM service_role
+INNER JOIN service ON service_role.Service_ID = service.Service_ID 
+INNER JOIN roles ON service_role.role_id = roles.id";
 $result = mysqli_query($connection, $query);
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
+if (!isset($_SESSION)) {
+    session_start();
+}
 if (!isset($_SESSION['sessionname'])) {
     echo "<script>window.open('login.php','_self')</script>";
 }
+
 ?>
 
 <head>
@@ -23,7 +24,7 @@ if (!isset($_SESSION['sessionname'])) {
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="assets/images/logo2.png">
-    <title>Admin - User List</title>
+    <title>Admin - Service</title>
     <!-- This page plugin CSS -->
     <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -33,9 +34,9 @@ if (!isset($_SESSION['sessionname'])) {
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
 </head>
 
 <body>
@@ -56,7 +57,7 @@ if (!isset($_SESSION['sessionname'])) {
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-7 align-self-center">
-                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">User List</h4>
+                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Service/Role List</h4>
                     <div class="d-flex align-items-center">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb m-0 p-0">
@@ -84,7 +85,8 @@ if (!isset($_SESSION['sessionname'])) {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12" style="text-align: right;">
-                                    <a class='btn btn-success' onclick='modDisp("user_list");' style='color:white'>Add User</a>
+                                    <a class='btn btn-success' onclick='modDisp("service_assign");' style='color:white'>Add
+                                        Service</a>
                                 </div>
                             </div>
                             <br>
@@ -93,37 +95,37 @@ if (!isset($_SESSION['sessionname'])) {
                                     width="100%">
                                     <thead>
                                         <tr style="text-align:center">
-                                            <th>Name</th>
-                                            <th>Email</th>
+                                            <th>Service Name</th>
+                                            <th>Role Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                            if ($result) {
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    $query1 = "SELECT * FROM users";
-                                                    $result1 = mysqli_query($connection, $query1);
-                                                    $row1 = mysqli_fetch_assoc($result1);
-                                                    if (isset($_GET['del'])) {
-                                                        $del_id = $_GET['del'];
-                                                        $delete = "DELETE FROM users WHERE id='$del_id'";
-                                                        $run_delete = mysqli_query($connection, $delete);
-                                                        if ($run_delete === true) {
-                                                            echo "<script>alert('record deleted succesfully'); window.open('user_list.php','_self');</script>";
-                                                        } else {
-                                                            echo "Failed, try again.";
-                                                        }
+                                        if ($result) {
+                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                $query1 = "SELECT * FROM service_role";
+                                                $result1 = mysqli_query($connection, $query1);
+                                                $row1 = mysqli_fetch_assoc($result1);
+                                                if (isset($_GET['del'])) {
+                                                    $del_id = $_GET['del'];
+                                                    $delete = "DELETE FROM service_role WHERE Service_ID='$del_id'";
+                                                    $run_delete = mysqli_query($connection, $delete);
+                                                    if ($run_delete === true) {
+                                                        echo "<script>alert('record deleted succesfully'); window.open('service_role.php','_self');</script>";
+                                                    } else {
+                                                        echo "Failed, try again.";
                                                     }
-
-                                                    echo "<tr>";
-                                                    echo "<td>" . $row['U_Name'] . "</td>";
-                                                    echo "<td>" . $row['email'] . "</td>";
-                                                    echo "<td><center>
-                                                            <a class='btn btn-danger' href='user_list.php?del=" . $row['id'] . "'>Delete</a>";
-                                                    echo "</tr>";
                                                 }
+
+                                                echo "<tr>";
+                                                echo "<td>" . $row['Description'] . "</td>";
+                                                echo "<td>" . $row['name'] . "</td>";
+                                                echo "<td><center>
+                                                    <a class='btn btn-danger' href='service_role.php?del=" . $row['Service_ID'] . "'>Delete</a>";
+                                                echo "</center></tr>";
                                             }
+                                        }
                                         ?>
                                     </tbody>
                                 </table>
@@ -172,6 +174,7 @@ if (!isset($_SESSION['sessionname'])) {
         $(document).ready(function () {
             //Only needed for the filename of export files.
             //Normally set in the title tag of your page.
+
             // DataTable initialisation
             $("#example").DataTable({
                 dom: '<"dt-buttons"Bf><"clear">lirtp',
@@ -215,8 +218,8 @@ if (!isset($_SESSION['sessionname'])) {
             });
         });
 
-        function modDisp(type) {
-            $('#exampleModal').load("modal_roles.php?types=" + type, function (response, status, xhr) {
+        function modDisp(id) {
+            $('#exampleModal').load("modal_roles.php?types=service_assign" + "&id=" + id, function (response, status, xhr) {
                 if (status == "success") {
                     $('#exampleModal').modal('show');
                 }

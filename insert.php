@@ -15,14 +15,15 @@ if (isset($_POST['submit-btn'])) {
   $Aduan_Info = $_POST['Aduan_Info'];
   $No_Tel = $_POST['No_Tel'];
   $Email = $_POST['Email'];
+  $service_id = $_POST['service_id'];
   $recaptcha = $_POST['g-recaptcha-response'];
   $secret_key = '6Lc7ImcjAAAAAI0WdaxwxJp04yrgPsoW4TEr44dD';
   $url = 'https://www.google.com/recaptcha/api/siteverify?secret='. $secret_key . '&response=' . $recaptcha;
   $response = file_get_contents($url);
   $response = json_decode($response);
   if ($response->success == true) {
-    $insert = "INSERT INTO aduan_tb (Nama_Pengadu,Aduan_Info,No_Tel,Email,Status_Desc)
-    VALUES(?,?,?,?,?)";
+    $insert = "INSERT INTO aduan_tb (Service_ID,Nama_Pengadu,Aduan_Info,No_Tel,Email,Status_Desc)
+    VALUES(?,?,?,?,?,?)";
     $stmt = mysqli_prepare($conn, $insert);
   } else {
     echo "<script>
@@ -39,7 +40,7 @@ if (isset($_POST['submit-btn'])) {
   }
 
   // Bind the values to the placeholders in the prepared statement
-  mysqli_stmt_bind_param($stmt, "ssiss", $Nama_Pengadu, $Aduan_Info, $No_Tel, $Email, $sent);
+  mysqli_stmt_bind_param($stmt, "sssiss", $service_id, $Nama_Pengadu, $Aduan_Info, $No_Tel, $Email, $sent);
 
   // Execute the prepared statement
   mysqli_stmt_execute($stmt);

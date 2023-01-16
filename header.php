@@ -117,6 +117,9 @@
                                 <li class="sidebar-item">
                                     <a href="service.php" class="sidebar-link"><span class="hide-menu">Service List</span></a>
                                 </li>
+                                <li class="sidebar-item">
+                                    <a href="service_role.php" class="sidebar-link"><span class="hide-menu">Service/Role List</span></a>
+                                </li>
                             </ul>
                             <?php } ?>
                         </li>

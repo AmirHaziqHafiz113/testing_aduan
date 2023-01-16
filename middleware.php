@@ -16,4 +16,13 @@
             return 'FALSE';
         }
     }
+
+    function hasServices ($val) {
+        global $arr_services;
+        if (in_array($val, $arr_services)) {
+            return 'TRUE';
+        } else {
+            return 'FALSE';
+        }
+    }
 ?>

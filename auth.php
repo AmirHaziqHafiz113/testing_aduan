@@ -10,12 +10,21 @@
     $result_check_user = mysqli_query($conn, $q_check_user);
     $arr_permissions = [];
     $arr_roles = [];
+    $arr_services = [];
 
     if ((mysqli_num_rows($result_check_user) > 0)) {
         $q_check_roles = "SELECT user_role.id, user_role.role_id, roles.id, roles.name AS role_name FROM user_role INNER JOIN roles ON user_role.role_id = roles.id WHERE user_id = $id";
         $result_check_roles = mysqli_query($conn, $q_check_roles);
         
         if ((mysqli_num_rows($result_check_roles) > 0)) {
+
+            $q_check_service = "SELECT service_role.id, service_role.Service_ID, service_role.role_id, roles.id, roles.name AS role_name FROM service_role INNER JOIN roles ON service_role.role_id = roles.id WHERE service_role.role_id = roles.id";
+            $result_check_service = mysqli_query($conn, $q_check_service);
+            if ((mysqli_num_rows($result_check_service) > 0)) {
+                while ($row = mysqli_fetch_assoc($result_check_service)) {
+                    array_push($arr_services, $row["role_name"]);
+                }
+            }
             while ($row = mysqli_fetch_assoc($result_check_roles)) {
                 array_push($arr_roles, $row["role_name"]);
 
