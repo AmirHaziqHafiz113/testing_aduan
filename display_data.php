@@ -101,31 +101,33 @@ $result = mysqli_query($connection, $query);
                                         <?php
 
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            if (isset($_GET['del'])) {
-                                                $del_id = $_GET['del'];
-                                                $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
-                                                $run_delete = mysqli_query($connection, $delete);
-                                                if (($run_delete === true) && (hasPermission('Delete') === 'TRUE')) {
-                                                    echo "<script>alert('record deleted succesfully'); window.open('display_data.php','_self');</script>";
-                                                } else {
-                                                    echo "Failed, try again.";
+                                            if (hasServices($row['Service_ID']) === 'TRUE') {
+                                                if (isset($_GET['del'])) {
+                                                    $del_id = $_GET['del'];
+                                                    $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
+                                                    $run_delete = mysqli_query($connection, $delete);
+                                                    if (($run_delete === true) && (hasPermission('Delete') === 'TRUE')) {
+                                                        echo "<script>alert('record deleted succesfully'); window.open('display_data.php','_self');</script>";
+                                                    } else {
+                                                        echo "Failed, try again.";
+                                                    }
                                                 }
-                                            }
 
-                                            echo "<tr>";
-                                            echo "<td>" . $row['Nama_Pengadu'] . "</td>";
-                                            echo "<td>" . $row['Email'] . "</td>";
-                                            echo "<td>" . $row['No_Tel'] . "</td>";
-                                            echo "<td>" . $row['Aduan_Info'] . "</td>";
-                                            echo "<td>" . $row['Status_Desc'] . "</td>";
-                                            echo "<td>" . $row['Timestamp_New'] . "</td>";
-                                            echo "<td><center>
-                                                <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] . ");' style='color:white'>View</a>&nbsp;&nbsp;";
-                                            if (hasPermission('Delete') === 'TRUE') {
-                                                echo "<a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;";
+                                                echo "<tr>";
+                                                echo "<td>" . $row['Nama_Pengadu'] . "</td>";
+                                                echo "<td>" . $row['Email'] . "</td>";
+                                                echo "<td>" . $row['No_Tel'] . "</td>";
+                                                echo "<td>" . $row['Aduan_Info'] . "</td>";
+                                                echo "<td>" . $row['Status_Desc'] . "</td>";
+                                                echo "<td>" . $row['Timestamp_New'] . "</td>";
+                                                echo "<td><center>
+                                                    <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] . ");' style='color:white'>View</a>&nbsp;&nbsp;";
+                                                if (hasPermission('Delete') === 'TRUE') {
+                                                    echo "<a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;";
+                                                }
+                                                echo "<a class='btn btn-primary' href='form.php?id=" . $row['Aduan_ID'] . "'>Insert</a></center></td>";
+                                                echo "</tr>";
                                             }
-                                            echo "<a class='btn btn-primary' href='form.php?id=" . $row['Aduan_ID'] . "'>Insert</a></center></td>";
-                                            echo "</tr>";
                                         }
                                         ?>
                                     </tbody>
