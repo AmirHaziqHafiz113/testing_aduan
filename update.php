@@ -34,7 +34,7 @@ if ($btn_val == 'Close') {
 } else if ($btn_val == 'submit') {
     if (hasRole('HeadDepartment') == 'TRUE') {
         $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'In Progress' WHERE Aduan_ID = $Aduan_ID";
-    } else if (hasRole('Admin') == 'TRUE') {
+    } else if (hasRole('Admin - Website') == 'TRUE' || hasRole('Admin - Digital Service') == 'TRUE' || hasRole('Admin - Editorial') == 'TRUE' || hasRole('Admin - MREM') == 'TRUE' || hasRole('Admin - Radio') == 'TRUE' || hasRole('Admin - Subscription') == 'TRUE' || hasRole('Admin - TV Service') == 'TRUE' || hasRole('Admin - General') == 'TRUE') {
         $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Status_Desc = 'Pending', Service_ID = '$service' WHERE Aduan_ID = $Aduan_ID";
     } else {
         $sql_aduan = "UPDATE aduan_tb SET langkah = '$langkah', Timestamp_In_Progress = '$current_timestamp', Service_ID = '$service' WHERE Aduan_ID = $Aduan_ID";

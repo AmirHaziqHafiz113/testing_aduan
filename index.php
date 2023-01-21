@@ -64,8 +64,8 @@ $result_service = mysqli_query($connect, $query_service);
                         <div class="form-group">
                             <label for="Nama_Pengadu" class="col-form-label">Nama
                                 Pengadu:</label>
-                            <input type="text" class="form-control" name="Nama_Pengadu"
-                                placeholder='Isi nama anda' required>
+                            <input type="text" class="form-control" name="Nama_Pengadu" placeholder='Isi nama anda'
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="Aduan_Info" class="col-form-label">Aduan:</label>
@@ -74,39 +74,40 @@ $result_service = mysqli_query($connect, $query_service);
                         </div>
                         <div class="form-group">
                             <label for="No_Tel" class="col-form-label">Nombor Telefon:</label>
-                            <input type="tel" class="form-control" name="No_Tel"
-                                pattern="[+60]?[0-9-]+"
-                                placeholder='Isi nombor anda seperti: 60123456789' required>
+                            <input type="tel" class="form-control" name="No_Tel" pattern="^\+(60)[0-9]{9}$"
+                                placeholder='Isi nombor anda seperti: +60123456789' required
+                                oninvalid="this.setCustomValidity('Nombor telefon mestilah dalam format +60123456789')"
+                                oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="Email" class="col-form-label">Email:</label>
-                            <input type="email" class="form-control" name="Email"
-                                placeholder='Isi email anda' required>
+                            <input type="email" class="form-control" name="Email" placeholder='Isi email anda' required>
                         </div>
                         <div class="form-group">
                             <label for="Service" class="col-form-label">Service:</label>
                             <select name="service_id" class="form-control" id="service_id">
-                            <?php
+                                <?php
                                 if ($result_service) {
                                     while ($row = mysqli_fetch_assoc($result_service)) { ?>
-                                        <option value="<?= $row['Service_ID'] ?>"><?= $row['Description'] ?></option>
+                                        <option value="<?= $row['Service_ID'] ?>">
+                                            <?= $row['Description'] ?>
+                                        </option>
                                     <?php }
                                 }
-                            ?>
-                        </select>
+                                ?>
+                            </select>
                         </div>
-                        
+
                         <div class="g-recaptcha" id="my_captcha_form"
                             data-sitekey="6Lc7ImcjAAAAAKtZ__d2mnC2SR8k9WeFmeQTQ-IU" required>
                         </div>
-                        <button type="submit" value='submit' class="btn btn-success"
-                            name="submit-btn">Send message</button>
-                        <button type="button" class="btn btn-light"
-                            data-dismiss="modal">Close</button>
+                        <button type="submit" value='submit' class="btn btn-success" name="submit-btn">Send
+                            message</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                     </form>
                 </div>
             </section>
-            
+
             <div class="pr-arrow-wrapper">
                 <div class="pr-arrow"></div>
             </div>

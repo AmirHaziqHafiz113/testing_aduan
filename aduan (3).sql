@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2023 at 05:29 AM
+-- Generation Time: Jan 20, 2023 at 02:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -49,21 +49,8 @@ CREATE TABLE `aduan_tb` (
 --
 
 INSERT INTO `aduan_tb` (`Aduan_ID`, `Service_ID`, `Status_Desc`, `Nama_Pengadu`, `No_Tel`, `Email`, `langkah`, `Aduan_Info`, `complaint_cond`, `Timestamp_New`, `Timestamp_Pending`, `Timestamp_In_Progress`, `Timestamp_Closed`, `Timestamp_Amend`) VALUES
-(70011, '30005', 'New', 'amir', '178016870', 'kenji@myori.my', NULL, 'asd', NULL, '2023-01-21 01:16:41', NULL, NULL, NULL, NULL),
+(70011, '30005', 'New', 'faizul', '178016870', 'kenji@myori.my', NULL, 'asd', NULL, '2023-01-16 12:37:59', NULL, NULL, NULL, NULL),
 (70012, '30004', 'New', 'Ahmad', '60123462245', 'ahmad@gmail.com', NULL, 'Kekosongan hati', NULL, '2023-01-20 01:04:51', NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `audit_trail`
---
-
-CREATE TABLE `audit_trail` (
-  `Audit_ID` int(50) NOT NULL,
-  `Action` varchar(255) NOT NULL,
-  `Add_By` varchar(255) NOT NULL,
-  `Timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -323,12 +310,6 @@ ALTER TABLE `aduan_tb`
   ADD PRIMARY KEY (`Aduan_ID`);
 
 --
--- Indexes for table `audit_trail`
---
-ALTER TABLE `audit_trail`
-  ADD PRIMARY KEY (`Audit_ID`);
-
---
 -- Indexes for table `pembetulan`
 --
 ALTER TABLE `pembetulan`
@@ -399,12 +380,6 @@ ALTER TABLE `user_role`
 --
 ALTER TABLE `aduan_tb`
   MODIFY `Aduan_ID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70013;
-
---
--- AUTO_INCREMENT for table `audit_trail`
---
-ALTER TABLE `audit_trail`
-  MODIFY `Audit_ID` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pembetulan`

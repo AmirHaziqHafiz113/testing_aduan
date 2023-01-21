@@ -3,10 +3,36 @@
 <?php
 include_once('middleware.php');
 $connection = new mysqli("localhost", "root", "", "aduan");
-$query = "SELECT aduan_tb.Aduan_ID, aduan_tb.Service_ID, aduan_tb.Nama_Pengadu, aduan_tb.Email, aduan_tb.No_Tel, aduan_tb.Status_Desc, aduan_tb.Aduan_Info, aduan_tb.Timestamp_New, service.Service_ID, service.Description
-FROM aduan_tb INNER JOIN
-service ON service.Service_ID = aduan_tb.Service_ID";
-$result = mysqli_query($connection, $query);
+require('audit.php');
+
+$username = $_SESSION['sessionname'];
+
+//getting user log
+$sql = "SELECT * FROM audit_trail";
+$result = mysqli_query($connection, $sql);
+//echo $sql.'<br>';
+
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+if (isset($_POST['submit'])) {
+    $search = $_POST['user'];
+    $action = $username . ' search for log ' . $search;
+
+    $sql = "SELECT * FROM audit_trail WHERE Add_By = '" . $search . "' ORDER BY datetime DESC";
+    audittrail($connection, $action, $username);
+    $result = mysqli_query($connection, $sql);
+    //echo $sql.'<br>';
+
+} else {
+    //getting directory / file information
+    $sql = "SELECT * FROM audit_trail ORDER BY Timestamp DESC";
+    $result = mysqli_query($connection, $sql);
+    //echo $sql.'<br>';
+}
+
+//getting directory list
+$sql2 = "SELECT * FROM audit_trail";
+$result2 = mysqli_query($connection, $sql2);
 
 ?>
 
@@ -19,7 +45,7 @@ $result = mysqli_query($connection, $query);
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="assets/images/logo2.png">
-    <title>Admin - List aduan</title>
+    <title>Admin - Report Trail</title>
     <!-- This page plugin CSS -->
     <link href="assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -75,6 +101,28 @@ $result = mysqli_query($connection, $query);
             <!-- ============================================================== -->
             <!-- order table -->
             <div class="row">
+                <!--Export to Pdf and excel-->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4 class="card-title">Report Trail</h4>
+                                </div>
+                                <?php while ($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC)) { ?>
+                                    <option value="<?php echo $row2['Add_By'] ?>">
+                                        <?php echo $row2['Add_By'] ?>
+                                    </option>
+                                <?php } ?>
+                                <select name='export_file_type' class='form-control'>
+                                    <option value='pdf'>PDF</option>
+                                    <option value='excel'>Excel</option>
+                                </select>
+                                <button type="submit" name="export" id="export" class="btn btn-success">Export</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
@@ -83,45 +131,21 @@ $result = mysqli_query($connection, $query);
                                     width="100%">
                                     <thead>
                                         <tr style="text-align:center">
-                                            <th>Nama Pengadu</th>
-                                            <th>Email</th>
-                                            <th>No. Telefon Pengadu</th>
-                                            <th>Info aduan</th>
-                                            <th>Status</th>
-                                            <th>Timestamp</th>
+                                            <th>ID</th>
                                             <th>Action</th>
+                                            <th>Add By</th>
+                                            <th>Timestamp</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            if (hasServices($row['Service_ID']) === 'TRUE') {
-                                                if (isset($_GET['del'])) {
-                                                    $del_id = $_GET['del'];
-                                                    $delete = "DELETE FROM Aduan_tb WHERE Aduan_ID='$del_id'";
-                                                    $run_delete = mysqli_query($connection, $delete);
-                                                    if (($run_delete === true) && (hasPermission('Delete') === 'TRUE')) {
-                                                        echo "<script>alert('record deleted succesfully'); window.open('display_data.php','_self');</script>";
-                                                    } else {
-                                                        echo "Failed, try again.";
-                                                    }
-                                                }
-
+                                            if (hasServices($row['Audit_ID']) === 'TRUE') {
                                                 echo "<tr>";
-                                                echo "<td>" . $row['Nama_Pengadu'] . "</td>";
-                                                echo "<td>" . $row['Email'] . "</td>";
-                                                echo "<td>" . $row['No_Tel'] . "</td>";
-                                                echo "<td>" . $row['Aduan_Info'] . "</td>";
-                                                echo "<td>" . $row['Status_Desc'] . "</td>";
-                                                echo "<td>" . $row['Timestamp_New'] . "</td>";
-                                                echo "<td><center>
-                                                    <a class='btn btn-info' onclick='modDisp(" . $row['Aduan_ID'] . ");' style='color:white'>View</a>&nbsp;&nbsp;";
-                                                if (hasPermission('Delete') === 'TRUE') {
-                                                    echo "<a class='btn btn-danger' href='display_data.php?del=" . $row['Aduan_ID'] . "'>Delete</a>&nbsp;&nbsp;";
-                                                }
-                                                echo "<a class='btn btn-primary' href='form.php?id=" . $row['Aduan_ID'] . "'>Insert</a></center></td>";
-                                                echo "</tr>";
+                                                echo "<td>" . $row['Aduan_ID'] . "</td>";
+                                                echo "<td>" . $row['Action'] . "</td>";
+                                                echo "<td>" . $row['Add_By'] . "</td>";
+                                                echo "<td>" . $row['Timestamp'] . "</td>";
                                             }
                                         }
                                         ?>
@@ -175,7 +199,7 @@ $result = mysqli_query($connection, $query);
             document.title = "Aduan - Form";
             // DataTable initialisation
             $("#example").DataTable({
-                order: [[5, 'desc']],
+                order: [[3, 'desc']],
                 paging: true,
                 autoWidth: true,
                 initComplete: function (settings, json) {
@@ -185,12 +209,6 @@ $result = mysqli_query($connection, $query);
         });
 
         function modDisp(id) {
-            /*$("#exampleModal #bookId").val(id.toString());
-            $("#exampleModal").modal('show'); */
-            /* $('#exampleModal').load('modal.php?id=2',function(){
-             $('#exampleModal').modal('show');
-             });*/
-
             $('#exampleModal').load("modal.php?did=" + id, function (response, status, xhr) {
                 if (status == "success") {
                     $('#exampleModal').modal('show');

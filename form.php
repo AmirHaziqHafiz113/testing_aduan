@@ -182,7 +182,7 @@ if ($_GET['id']) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <?php if (((hasPermission('Edit') === 'TRUE') && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin') == 'TRUE')) { ?>
+                                                    <?php if (((hasPermission('Edit') === 'TRUE') && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin - Website') == 'TRUE' || hasRole('Admin - Digital Service') == 'TRUE' || hasRole('Admin - Editorial') == 'TRUE' || hasRole('Admin - MREM') == 'TRUE' || hasRole('Admin - Radio') == 'TRUE' || hasRole('Admin - Subscription') == 'TRUE' || hasRole('Admin - TV Service') == 'TRUE' || hasRole('Admin - General') == 'TRUE')) { ?>
                                                     <input type="text" class="form-control" name="pencegahan"
                                                         placeholder="Isi langkah pencegahan"
                                                         value="<?= isset($row_pencegahan['Description']) ? $row_pencegahan['Description'] : '' ?>"
@@ -200,7 +200,7 @@ if ($_GET['id']) {
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <?php if ((hasPermission('Edit') === 'TRUE' && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin') == 'TRUE')) { ?>
+                                                    <?php if ((hasPermission('Edit') === 'TRUE' && ($row['Status_Desc'] == 'Pending')) || ($row['complaint_cond'] != 'Closed' && hasRole('SuperAdmin') == 'TRUE' || hasRole('Admin - Website') == 'TRUE' || hasRole('Admin - Digital Service') == 'TRUE' || hasRole('Admin - Editorial') == 'TRUE' || hasRole('Admin - MREM') == 'TRUE' || hasRole('Admin - Radio') == 'TRUE' || hasRole('Admin - Subscription') == 'TRUE' || hasRole('Admin - TV Service') == 'TRUE' || hasRole('Admin - General') == 'TRUE')) { ?>
                                                     <input type="text" class="form-control" name="pembetulan"
                                                         placeholder="Isi langkah pembetulan"
                                                         value="<?= isset($row_pembetulan['Description']) ? $row_pembetulan['Description'] : '' ?>"
